@@ -7,14 +7,52 @@
     tools:context=".MainActivity">
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_btn_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/frame_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/purple_200"
+        app:srcCompat="@drawable/float_btn_main_img" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_btn_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/float_btn_main"
+        app:layout_constraintEnd_toEndOf="@+id/float_btn_main"
+        app:srcCompat="@drawable/float_btn_expense_img"
+        app:backgroundTint="@color/black"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/float_btn_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/float_btn_main"
+        app:layout_constraintEnd_toEndOf="@+id/float_btn_main"
+        app:srcCompat="@drawable/float_btn_income_img" />
+
     <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/frame_layout">
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 
