@@ -1,25 +1,58 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Mobile_Final_project" parent="Theme.AppCompat">
+    <style name="Theme.Mobile_Final_project" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
+
+
+
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/orange</item>
+
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/light_grey</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">@color/black</item>
         <!-- Customize your theme here. -->
+
+
+        <!--change default style of specified components-->
+        <item name="buttonStyle">@style/btn_style</item>
+        <item name="toolbarStyle">@style/appbar_layout</item>
+        <item name="tabStyle">@style/tab_layout</item>
+        <item name="bottomNavigationStyle">@style/bottom_nav_layout</item>
+
     </style>
 
-    <style name="Theme.Mobile_Final_project.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+    <!--btn_style-->
+    <style name="btn_style" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/red</item>
     </style>
 
-    <style name="Theme.Mobile_Final_project.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.Mobile_Final_project.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!--toolbar_style-->
+    <style name="appbar_layout" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/light_grey</item>
+    </style>
+
+    <!--tabLayout_style-->
+    <style name="tab_layout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="android:background">@color/light_grey</item>
+    </style>
+
+
+    <!--bottomNav_style-->
+    <style name="bottom_nav_layout" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">@color/black</item>
+        <item name="tickColorInactive">@color/orange</item>
+    </style>
+
+
+
 </resources>
