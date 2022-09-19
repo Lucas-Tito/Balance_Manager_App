@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +13,6 @@ import android.view.animation.AnimationUtils;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import kotlin.Lazy;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
         fab_expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, Float_Btn_Screen_Activity.class);
+                intent.putExtra("fragToStart", 1);
+                startActivity(intent);
             }
         });
 
@@ -106,10 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.home:
                         fragment = new Home();
-                        break;
-
-                    case R.id.add:
-                        fragment = new Add_Screen();
                         break;
 
                     case R.id.more:

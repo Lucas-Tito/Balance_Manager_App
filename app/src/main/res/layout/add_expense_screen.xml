@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Add_Screen">
+    tools:context=".Add_Expense_Screen">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,7 +108,7 @@
 
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -119,6 +119,46 @@
 
                 </LinearLayout>
 
+                <!--for some reason, lines disappear when zoomed out (only on emulator)-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/category_ic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/add_screen_category" />
+
+
+                    <TextView
+                        android:id="@+id/placeholder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:ems="15"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Place Holder Category" />
+
+                    <ImageView
+                        android:id="@+id/next_ic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/add_screen_arrow" />
+
+                </LinearLayout>
+
+                <!--for some reason, lines disappear when zoomed out (only on emulator)-->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
@@ -127,6 +167,10 @@
                     android:background="@color/white" />
 
             </LinearLayout>
+
+
+
+
 
             <ImageButton
                 android:id="@+id/imageButton"

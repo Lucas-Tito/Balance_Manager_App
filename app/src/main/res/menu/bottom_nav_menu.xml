@@ -7,12 +7,6 @@
         android:id="@+id/home" />
 
     <item
-        android:title="Add"
-        android:icon="@drawable/bottom_nav_add"
-        android:id="@+id/add" />
-
-
-    <item
         android:title="More"
         android:icon="@drawable/bottom_nav_more"
         android:id="@+id/more"/>

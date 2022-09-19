@@ -13,35 +13,49 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="20dp"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/frame_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/purple_200"
         app:srcCompat="@drawable/float_btn_main_img" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/float_btn_expense"
+        style="@style/sub_float_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:clickable="true"
-        android:visibility="invisible"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toTopOf="@+id/float_btn_main"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_main"
-        app:srcCompat="@drawable/float_btn_expense_img"
-        app:backgroundTint="@color/black"/>
+        app:srcCompat="@drawable/float_btn_expense_img" />
+
+    <TextView
+        android:id="@+id/expense_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Expense"
+        app:layout_constraintEnd_toEndOf="@+id/float_btn_expense"
+        app:layout_constraintStart_toStartOf="@+id/float_btn_expense"
+        app:layout_constraintTop_toBottomOf="@+id/float_btn_expense" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/float_btn_income"
+        style="@style/sub_float_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="70dp"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:backgroundTint="@color/black"
+        android:layout_marginEnd="80dp"
         app:layout_constraintBottom_toTopOf="@+id/float_btn_main"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_main"
         app:srcCompat="@drawable/float_btn_income_img" />
+
+    <TextView
+        android:id="@+id/income_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Income"
+        app:layout_constraintEnd_toEndOf="@+id/float_btn_income"
+        app:layout_constraintStart_toStartOf="@+id/float_btn_income"
+        app:layout_constraintTop_toBottomOf="@+id/float_btn_income" />
 
     <FrameLayout
         android:id="@+id/frame_layout"
