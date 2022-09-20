@@ -26,6 +26,7 @@
         <item name="toolbarStyle">@style/appbar_layout</item>
         <item name="tabStyle">@style/tab_layout</item>
         <item name="bottomNavigationStyle">@style/bottom_nav_layout</item>
+        <item name="floatingActionButtonStyle">@style/main_float_btn</item>
 
     </style>
 
@@ -54,6 +55,23 @@
         <item name="tickColorInactive">@color/orange</item>
     </style>
 
+    <!--main_float_btn_style-->
+    <style name="main_float_btn" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/purple_200</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
 
+        <!--changes icon color-->
+        <item name="tint">@null</item>
+    </style>
+
+
+    <!--sub_float_btn_style-->
+    <style name="sub_float_btn" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/black</item>
+        <item name="android:visibility">invisible</item>
+        <!--changes icon color-->
+        <item name="tint">@null</item>
+    </style>
 
 </resources>
