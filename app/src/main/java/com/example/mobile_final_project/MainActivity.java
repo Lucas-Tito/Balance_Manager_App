@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.float_btn_from_bottom);
         toBottom = AnimationUtils.loadAnimation(this, R.anim.float_btn_to_bottom);
 
+        TextView expense_label, income_label;
+        expense_label = findViewById(R.id.expense_label);
+        income_label = findViewById(R.id.income_label);
+
 
 
         /*handles animation and visibility of sub buttons*/
@@ -51,18 +56,26 @@ public class MainActivity extends AppCompatActivity {
 
                     fab_expense.setVisibility(View.VISIBLE);
                     fab_expense.startAnimation(fromBottom);
+                    expense_label.setVisibility(View.VISIBLE);
+                    expense_label.startAnimation(fromBottom);
 
                     fab_income.setVisibility(View.VISIBLE);
                     fab_income.startAnimation(fromBottom);
+                    income_label.setVisibility(View.VISIBLE);
+                    income_label.startAnimation(fromBottom);
                 }
                 else{
                     fab_main.startAnimation(rotateClose);
 
                     fab_expense.setVisibility(View.INVISIBLE);
                     fab_expense.startAnimation(toBottom);
+                    expense_label.setVisibility(View.INVISIBLE);
+                    expense_label.startAnimation(toBottom);
 
                     fab_income.setVisibility(View.INVISIBLE);
                     fab_income.startAnimation(toBottom);
+                    income_label.setVisibility(View.INVISIBLE);
+                    income_label.startAnimation(toBottom);
                 }
 
                 fab_main_clicked = !fab_main_clicked;
@@ -81,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
         fab_income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, Float_Btn_Screen_Activity.class);
+                intent.putExtra("fragToStart", 2);
+                startActivity(intent);
             }
         });
 

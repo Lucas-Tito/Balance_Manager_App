@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Expense"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_expense"
         app:layout_constraintStart_toStartOf="@+id/float_btn_expense"
         app:layout_constraintTop_toBottomOf="@+id/float_btn_expense" />
@@ -53,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Income"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_income"
         app:layout_constraintStart_toStartOf="@+id/float_btn_income"
         app:layout_constraintTop_toBottomOf="@+id/float_btn_income" />
