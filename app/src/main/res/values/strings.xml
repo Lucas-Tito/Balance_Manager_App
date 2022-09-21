@@ -9,4 +9,37 @@
 
 
     <string name="hello_blank_fragment">Hey, you\'re in home</string>
+
+
+
+    <!-- activity_main -->
+    <string name="main_fab_desc">this is a button to add expenses or incomes</string>
+    <string name="sub_fab_expense_desc">this button adds expenses</string>
+    <string name="sub_fab_expense_label">Expense</string>
+    <string name="sub_fab_income_desc">this button adds incomes</string>
+    <string name="sub_fab_income_label">Income</string>
+
+
+    <!-- home_fragment -->
+    <string name="balance_label">Account balance</string>
+    <string name="incomes_label">Incomes</string>
+    <string name="expenses_label">Expenses</string>
+    <string name="btn_visibility_desc">button to change balance visibility</string>
+
+
+    <!-- add_expense_screen -->
+    <string name="expense_amount_label">Expense amount</string>
+    <string name="paid_label">Paid</string>
+    <string name="description_label">Description</string>
+    <string name="toolbar_title_expense">New Expense</string>
+
+
+    <!-- add_income_screen -->
+    <string name="income_amount_label">Income amount</string>
+    <string name="received_label">Received</string>
+    <string name="btn_back_desc">button to go back to home</string>
+    <string name="toolbar_title_income">New Income</string>
+
+    <!-- activity_float_btn_screen -->
+
 </resources>

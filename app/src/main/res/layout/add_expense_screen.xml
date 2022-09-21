@@ -18,7 +18,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="291dp"
-            android:text="Expense amount"
+            android:text="@string/expense_amount_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:text="$0.00"
-            android:textSize="30dp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/add_screen_retangular_shape"
+            android:background="@drawable/add_screen_rectangular_shape"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
                         android:id="@+id/isPaid_ic"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
                         android:src="@drawable/add_screen_is_paid" />
 
                     <TextView
@@ -75,9 +75,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Paid"
+                        android:text="@string/paid_label"
                         android:textColor="@color/white"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <Switch
                         android:id="@+id/switch2"
@@ -103,7 +103,7 @@
                         android:id="@+id/mic_disc_ic"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
                         android:src="@drawable/add_screen_audio_description" />
 
 
@@ -115,7 +115,7 @@
                         android:ems="20"
                         android:gravity="center_vertical"
                         android:inputType="textLongMessage"
-                        android:text="Description" />
+                        android:text="@string/description_label" />
 
                 </LinearLayout>
 
@@ -136,13 +136,13 @@
                         android:id="@+id/category_ic"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="8dp"
                         android:src="@drawable/add_screen_category" />
 
 
                     <TextView
                         android:id="@+id/placeholder"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:ems="15"

@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="35dp"
+        android:contentDescription="@string/main_fab_desc"
         app:layout_constraintBottom_toBottomOf="@+id/frame_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/float_btn_main_img" />
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
+        android:contentDescription="@string/sub_fab_expense_desc"
         app:layout_constraintBottom_toTopOf="@+id/float_btn_main"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_main"
         app:srcCompat="@drawable/float_btn_expense_img" />
@@ -32,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Expense"
+        android:text="@string/sub_fab_expense_label"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_expense"
         app:layout_constraintStart_toStartOf="@+id/float_btn_expense"
@@ -44,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="80dp"
+        android:contentDescription="@string/sub_fab_income_desc"
         app:layout_constraintBottom_toTopOf="@+id/float_btn_main"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_main"
         app:srcCompat="@drawable/float_btn_income_img" />
@@ -53,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Income"
+        android:text="@string/sub_fab_income_label"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/float_btn_income"
         app:layout_constraintStart_toStartOf="@+id/float_btn_income"

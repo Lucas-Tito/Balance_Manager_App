@@ -48,11 +48,11 @@ public class Float_Btn_Screen_Activity extends AppCompatActivity {
 
         if(getIntent().getIntExtra("fragToStart", 0) == 1){
             fragmentToStart = new Add_Expense_Screen();
-            toolbar_title.setText("New Expense");
+            toolbar_title.setText(R.string.toolbar_title_expense);
         }
         else if(getIntent().getIntExtra("fragToStart", 0) == 2){
             fragmentToStart = new Add_Income_Screen();
-            toolbar_title.setText("New Income");
+            toolbar_title.setText(R.string.toolbar_title_income);
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragmentToStart).commit();

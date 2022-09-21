@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Home">
 
-    >
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/home_screen_retangular_shape">
+                android:background="@drawable/home_screen_rectangular_shape">
 
                 <LinearLayout
                     android:id="@+id/month_layout"
@@ -44,10 +44,10 @@
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
                         android:textSize="20sp"
-                        android:text="Setember" />
+                        android:text="September" />
 
                     <ImageView
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:id="@+id/month_select"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -65,7 +65,7 @@
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:text="Account Balance" />
+                    android:text="@string/balance_label" />
 
                 <TextView
                     android:id="@+id/balance_amount"
@@ -79,6 +79,7 @@
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/btn_visibility_desc"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/home_balance_visibility"
                     android:layout_marginTop="15dp"/>
@@ -115,14 +116,14 @@
                             android:id="@+id/income_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
-                                android:text="Incomes"
+                                android:text="@string/incomes_label"
                                 android:textSize="16sp" />
 
                             <TextView
@@ -139,7 +140,7 @@
                         android:id="@+id/expenses"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:layout_marginEnd="25dp"
                         android:layout_marginBottom="20dp"
                         android:orientation="horizontal"
@@ -158,14 +159,14 @@
                             android:id="@+id/expanse_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
-                                android:text="Expenses"
+                                android:text="@string/expenses_label"
                                 android:textSize="16sp" />
 
                             <TextView

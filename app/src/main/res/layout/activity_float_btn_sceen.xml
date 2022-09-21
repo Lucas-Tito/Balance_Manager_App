@@ -29,7 +29,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp">
+                android:layout_marginEnd="5dp">
 
                 <ImageButton
                     android:id="@+id/back_btn"
@@ -37,13 +37,14 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/toolbar_back_ic"
                     android:background="@null"
+                    android:contentDescription="@string/btn_back_desc"
                     android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_gravity="center"
                     android:text=""
                     android:textSize="20sp"
