@@ -3,18 +3,18 @@
 
     <item
         android:title="Home"
-        android:icon="@drawable/bottom_nav_home"
+        android:icon="@drawable/bottom_nav_home_ic"
         android:id="@+id/home" />
 
 
     <item
         android:title="Transactions"
-        android:icon="@drawable/bottom_nav_transactions"
+        android:icon="@drawable/bottom_nav_transactions_ic"
         android:id="@+id/transactions" />
 
     <item
         android:title="More"
-        android:icon="@drawable/bottom_nav_more"
+        android:icon="@drawable/bottom_nav_more_ic"
         android:id="@+id/more"/>
 
 </menu>

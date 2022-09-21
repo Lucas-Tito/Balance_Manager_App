@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.transactions:
-                        fragment = new Transactions();
+                        fragment = new Transactions_Activity();
                         break;
 
                     case R.id.more:

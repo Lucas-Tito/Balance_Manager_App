@@ -11,7 +11,6 @@
     <string name="hello_blank_fragment">Hey, you\'re in home</string>
 
 
-
     <!-- activity_main -->
     <string name="main_fab_desc">this is a button to add expenses or incomes</string>
     <string name="sub_fab_expense_desc">this button adds expenses</string>
@@ -40,6 +39,7 @@
     <string name="btn_back_desc">button to go back to home</string>
     <string name="toolbar_title_income">New Income</string>
 
-    <!-- activity_float_btn_screen -->
+    <!-- bottom_nav_transactions -->
+    <string name="toolbar_title">Transactions</string>
 
 </resources>
