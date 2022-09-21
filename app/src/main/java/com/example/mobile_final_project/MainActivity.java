@@ -124,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new Home();
                         break;
 
+                    case R.id.transactions:
+                        fragment = new Transactions_Screen();
+                        break;
+
                     case R.id.more:
                         fragment = new More_Screen();
                         break;
