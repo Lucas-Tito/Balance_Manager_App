@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/home_screen_rectangular_shape">
+                android:background="@drawable/home_rectangular_shape">
 
                 <LinearLayout
                     android:id="@+id/month_layout"
@@ -52,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:src="@drawable/home_dashboard_arrow"
+                        android:src="@drawable/home_arrow"
                         app:tint="@color/white"/>
 
                 </LinearLayout>
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/btn_visibility_desc"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/home_balance_visibility"
+                    android:src="@drawable/home_visibility_ic"
                     android:layout_marginTop="15dp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,9 +108,9 @@
                             android:id="@+id/imageView2"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:background="@drawable/add_btn_shape"
+                            android:background="@drawable/add_transaction_btn_shape"
                             android:backgroundTint="@color/light_green"
-                            android:src="@drawable/home_dashboard_income" />
+                            android:src="@drawable/home_income_ic" />
 
                         <LinearLayout
                             android:id="@+id/income_layout"
@@ -152,8 +152,8 @@
                             android:id="@+id/imageView5"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:background="@drawable/add_btn_shape"
-                            android:src="@drawable/home_dashboard_expense" />
+                            android:background="@drawable/add_transaction_btn_shape"
+                            android:src="@drawable/home_expense_ic" />
 
                         <LinearLayout
                             android:id="@+id/expanse_layout"

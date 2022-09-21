@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Add_Expense_Screen">
+    tools:context=".Add_Transaction_Expense">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/add_screen_rectangular_shape"
+            android:background="@drawable/add_transaction_rectangular_shape"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/add_screen_is_paid" />
+                        android:src="@drawable/add_transaction_paid_ic" />
 
                     <TextView
                         android:id="@+id/isPaid"
@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/add_screen_audio_description" />
+                        android:src="@drawable/add_transaction_audio_ic" />
 
 
                     <EditText
@@ -137,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/add_screen_category" />
+                        android:src="@drawable/add_transaction_category_ic" />
 
 
                     <TextView
@@ -154,7 +154,7 @@
                         android:id="@+id/next_ic"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/add_screen_arrow" />
+                        android:src="@drawable/add_transaction_arrow" />
 
                 </LinearLayout>
 
@@ -177,8 +177,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="30dp"
-                android:background="@drawable/add_btn_shape"
-                android:src="@drawable/add_btn_img"
+                android:background="@drawable/add_transaction_btn_shape"
+                android:src="@drawable/add_transaction_btn_ic"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Mobile_Final_project"
         tools:targetApi="31">
         <activity
-            android:name=".Float_Btn_Screen_Activity"
+            android:name=".Add_Transaction_Activity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

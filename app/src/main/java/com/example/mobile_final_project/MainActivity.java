@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         fab_expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Float_Btn_Screen_Activity.class);
+                Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 1);
                 startActivity(intent);
             }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         fab_income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Float_Btn_Screen_Activity.class);
+                Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 2);
                 startActivity(intent);
             }
@@ -125,11 +125,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.transactions:
-                        fragment = new Transactions_Screen();
+                        fragment = new Transactions();
                         break;
 
                     case R.id.more:
-                        fragment = new More_Screen();
+                        fragment = new More();
                         break;
 
                 }

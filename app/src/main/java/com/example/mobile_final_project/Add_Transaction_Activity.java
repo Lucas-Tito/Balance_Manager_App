@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class Float_Btn_Screen_Activity extends AppCompatActivity {
+public class Add_Transaction_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_float_btn_sceen);
+        setContentView(R.layout.activity_add_transaction);
 
         //--------------toolbar----------------------+
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,11 +47,11 @@ public class Float_Btn_Screen_Activity extends AppCompatActivity {
         TextView toolbar_title = findViewById(R.id.toolbar_title);
 
         if(getIntent().getIntExtra("fragToStart", 0) == 1){
-            fragmentToStart = new Add_Expense_Screen();
+            fragmentToStart = new Add_Transaction_Expense();
             toolbar_title.setText(R.string.toolbar_title_expense);
         }
         else if(getIntent().getIntExtra("fragToStart", 0) == 2){
-            fragmentToStart = new Add_Income_Screen();
+            fragmentToStart = new Add_Transaction_Income();
             toolbar_title.setText(R.string.toolbar_title_income);
         }
 
