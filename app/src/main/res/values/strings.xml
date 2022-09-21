@@ -41,5 +41,7 @@
 
     <!-- bottom_nav_transactions -->
     <string name="toolbar_title">Transactions</string>
+    <string name="current_balance_label">Current Balance</string>
+    <string name="monthly_balance_label">Monthly Balance</string>
 
 </resources>
