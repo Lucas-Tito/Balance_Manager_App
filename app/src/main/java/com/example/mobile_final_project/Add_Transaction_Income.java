@@ -2,11 +2,14 @@ package com.example.mobile_final_project;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +22,9 @@ public class Add_Transaction_Income extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    //Componentes do layout
+    private TextView incomeAmount;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -60,5 +66,14 @@ public class Add_Transaction_Income extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.add_transaction_income, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        incomeAmount =getView().findViewById(R.id.textView2);
+
+
     }
 }

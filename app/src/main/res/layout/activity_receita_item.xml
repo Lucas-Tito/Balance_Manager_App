@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
+android:id="@+id/card_view"
+android:layout_gravity="center_horizontal"
+android:layout_width="400dp"
+android:layout_height="200dp"
+card_view:cardCornerRadius="8dp"
+
+tools:context=".activitys.ReceitaItem"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/txtViewTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nova receita"
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+           <TextView
+                android:id="@+id/txtValorReceita"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Valor de entrada: " />
+
+            <EditText
+                android:id="@+id/edtValorReceita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Entrada"
+                android:inputType="numberDecimal" />
+
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/txtDataEntradaReceita"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Data: " />
+
+            <EditText
+                android:id="@+id/edtDataEntradaReceita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_marginLeft="65dp"
+                android:hint="Escolha uma data"
+                android:inputType="date"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/txtDescricaoReceita"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Descrição: " />
+
+            <EditText
+                android:id="@+id/edtDescricaoReceita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_marginLeft="40dp"
+                android:hint="Fale como obteve essa entrada"
+                android:inputType="textAutoComplete" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="300dp"
+                android:text="Salvar"
+                android:textColor="@color/White"
+                android:textSize="10dp"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>
