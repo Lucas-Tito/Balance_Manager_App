@@ -1,4 +1,4 @@
-# Mobile_Final_Project
+# Balance Manager App
 
 ### ToDo list (Tito)
 
