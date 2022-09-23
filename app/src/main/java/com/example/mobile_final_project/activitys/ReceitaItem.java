@@ -43,7 +43,7 @@ public class ReceitaItem extends AppCompatActivity {
         Date dataEntradaReceita = Date.valueOf(txtDataEntradaReceita.getText().toString());
         String descricaoReceita = txtValorReceita.getText().toString();
 
-        Receita receita = new Receita(valorReceita,dataEntradaReceita,descricaoReceita);
+        Receita receita = new Receita(descricaoReceita,dataEntradaReceita,valorReceita);
 
         listReceita.add(receita);
 

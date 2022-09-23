@@ -8,47 +8,6 @@
 
     <!--_________________ACTION BAR_________________________________-->
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        android:layout_marginTop="20dp">
-
-        <ImageButton
-            android:id="@+id/imageButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:tint="@color/white"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/transactions_left_arrow_ic" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:textSize="22sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="September" />
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:backgroundTint="@android:color/transparent"
-            app:tint="@color/white"
-            android:src="@drawable/add_transaction_arrow" />
-
-    </LinearLayout>
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -111,9 +70,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        app:tint="@color/white"
                         android:backgroundTint="@android:color/transparent"
-                        app:srcCompat="@drawable/transactions_toolbar_search" />
+                        app:srcCompat="@drawable/transactions_toolbar_search"
+                        app:tint="@color/white" />
 
                     <ImageButton
                         android:id="@+id/filter"
@@ -121,8 +80,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/transparent"
-                        app:tint="@color/white"
-                        app:srcCompat="@drawable/transactions_toolbar_filter" />
+                        app:srcCompat="@drawable/transactions_toolbar_filter"
+                        app:tint="@color/white" />
 
 
                     <ImageButton
@@ -131,8 +90,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/transparent"
-                        app:tint="@color/white"
-                        app:srcCompat="@drawable/transactions_toolbar_more" />
+                        app:srcCompat="@drawable/transactions_toolbar_more"
+                        app:tint="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -140,6 +99,47 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/monthSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        android:layout_marginTop="20dp">
+
+        <ImageButton
+            android:id="@+id/previous_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tint="@color/white"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/transactions_left_arrow_ic" />
+
+        <TextView
+            android:id="@+id/monthLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="September" />
+
+        <ImageButton
+            android:id="@+id/next_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            app:tint="@color/white"
+            android:src="@drawable/add_transaction_arrow" />
+
+    </LinearLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -151,7 +151,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/monthSelector">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -165,7 +165,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">>
+
             <LinearLayout
+                android:id="@+id/balance_stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -174,14 +176,14 @@
                     android:id="@+id/current_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        app:tint="@color/white"
-                        android:src="@drawable/transactions_bag_ic" />
+                        android:src="@drawable/transactions_bag_ic"
+                        app:tint="@color/white" />
 
                     <LinearLayout
                         android:id="@+id/current_balance_layout"
@@ -212,14 +214,14 @@
                     android:id="@+id/month_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        app:tint="@color/white"
-                        android:src="@drawable/transactions_wallet_ic" />
+                        android:src="@drawable/transactions_wallet_ic"
+                        app:tint="@color/white" />
 
                     <LinearLayout
                         android:id="@+id/monthly_balance_layout"
@@ -255,6 +257,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@color/white" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
 
