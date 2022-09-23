@@ -2,4 +2,4 @@
 
 ### ToDo list (Tito)
 
-+ resize fab to 60dp (fabCustomSize isn't working for some reason)
++ janky abstract class (Transiction), also RecyclerView adapter not creating itens in the best order
