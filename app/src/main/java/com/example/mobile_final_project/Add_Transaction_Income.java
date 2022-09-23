@@ -1,5 +1,6 @@
 package com.example.mobile_final_project;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,17 +12,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mobile_final_project.dao_transaction.ReceitaDAO;
+import com.example.mobile_final_project.utils.EditAmountTransaction;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Add_Transaction_Income#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Add_Transaction_Income extends Fragment {
+public class Add_Transaction_Income extends Fragment implements DialogCloseListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    //private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
+
+    DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+
+
+    private static DecimalFormat REAL_FORMATTER = new DecimalFormat("$ #,##0.00");
 
     //Componentes do layout
     private TextView incomeAmount;
@@ -72,8 +86,32 @@ public class Add_Transaction_Income extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        incomeAmount =getView().findViewById(R.id.textView2);
+        incomeAmount = getView().findViewById(R.id.textView2);
+
+        incomeAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new EditAmountTransaction().show(getActivity().getSupportFragmentManager(), EditAmountTransaction.newInstance().getTag());
+            }
+        });
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+
+    }
+
+    @Override
+    public void handleDialogClose(DialogInterface dialog)
+    {
+
+    }
+
+
+
 }
