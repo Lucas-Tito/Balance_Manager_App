@@ -18,10 +18,12 @@ public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerV
 
     ArrayList<Despesa> expenses = new ArrayList<>();
     Context context;
+    private final Interface_RecyclerView recyclerViewInterface;
 
-    public Adapter_RecyclerView(Context ct, ArrayList<Despesa> expenses){
+    public Adapter_RecyclerView(Context ct, ArrayList<Despesa> expenses, Interface_RecyclerView recyclerViewInterface){
         this.expenses = expenses;
         context = ct;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -58,6 +60,20 @@ public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerV
             description_label = itemView.findViewById(R.id.description_label);
             category_label = itemView.findViewById(R.id.category_label);
             amount_label = itemView.findViewById(R.id.amount_label);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(recyclerViewInterface!=null){
+                        int pos = getAdapterPosition();
+
+                        //if position is valid
+                        if(pos!=RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 

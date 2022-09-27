@@ -29,6 +29,26 @@ public class ExpenseDAO {
 
     }
 
+    public void removeExpense(int id){
+
+        expenses.remove(id);
+
+    }
+
+    public void editExpense(int id, int amount, boolean isPaid, String description, String category){
+
+        expenses.get(id).setValor(amount);
+        expenses.get(id).setIsPaid(isPaid);
+        expenses.get(id).setDescricao(description);
+        expenses.get(id).setCategoria(category);
+
+    }
+
+
+    public Despesa get(int pos){
+        return expenses.get(pos);
+    }
+
     public ArrayList<Despesa> getAll(){
         return expenses;
     }

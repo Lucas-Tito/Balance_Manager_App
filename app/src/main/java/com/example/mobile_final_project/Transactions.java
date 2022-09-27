@@ -1,5 +1,6 @@
 package com.example.mobile_final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,16 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobile_final_project.Adapters.Adapter_RecyclerView;
+import com.example.mobile_final_project.Adapters.Interface_RecyclerView;
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.model.Despesa;
 
 import java.util.ArrayList;
 
 
-public class Transactions extends Fragment {
+public class Transactions extends Fragment implements Interface_RecyclerView {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ExpenseDAO expenseDAO = new ExpenseDAO();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -60,16 +63,24 @@ public class Transactions extends Fragment {
 
     private void build_recyclerView(View v) {
 
-        ExpenseDAO expenseDAO = new ExpenseDAO();
-
         ArrayList<Despesa> expenses = expenseDAO.getAll();
 
         androidx.recyclerview.widget.RecyclerView recyclerView;
         recyclerView = v.findViewById(R.id.recyclerView);
 
-        Adapter_RecyclerView myAdapter = new Adapter_RecyclerView(getActivity(), expenses);
+        Adapter_RecyclerView myAdapter = new Adapter_RecyclerView(getActivity(), expenses, this);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
+    }
+
+    //click listener for recycleView items
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(getActivity(), Edit_Transaction_Activity.class);
+        intent.putExtra("expensePos", position);
+
+        startActivity(intent);
     }
 }

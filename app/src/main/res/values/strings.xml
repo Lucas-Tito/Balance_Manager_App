@@ -44,4 +44,7 @@
     <string name="current_balance_label">Current Balance</string>
     <string name="monthly_balance_label">Monthly Balance</string>
 
+    <!-- activity_edit_transaction -->
+    <string name="edit_transaction_label">Edit</string>
+
 </resources>

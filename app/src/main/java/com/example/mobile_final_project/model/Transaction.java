@@ -9,12 +9,14 @@ abstract class Transaction {
     private String descricao, categoria;
     private Date dataEntrada;
     private double valor;
+    private boolean isPaid;
 
     Transaction(String descricao, Date data, double valor){
 
         this.descricao = descricao;
         this.dataEntrada = data;
         this.valor = valor;
+        this.isPaid = true;
 
     }
 
@@ -57,6 +59,14 @@ abstract class Transaction {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public boolean getIsPaid(){
+        return isPaid;
+    }
+
+    public void setIsPaid(boolean value){
+        this.isPaid = value;
     }
 
 
