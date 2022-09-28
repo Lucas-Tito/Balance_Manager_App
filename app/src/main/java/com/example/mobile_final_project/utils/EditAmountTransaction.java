@@ -1,8 +1,6 @@
 package com.example.mobile_final_project.utils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -122,7 +120,7 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         Activity activity = getActivity();
-        TextView incomeAmount = activity.findViewById(R.id.textView2);
+        TextView incomeAmount = activity.findViewById(R.id.amount);
         if(ReceitaDAO.amount != null)
         {
             incomeAmount.setText(REAL_FORMATTER.format(ReceitaDAO.amount));

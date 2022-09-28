@@ -2,25 +2,26 @@ package com.example.mobile_final_project;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Edit_Transaction_Expense#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+
+
 public class Edit_Transaction_Expense extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    ExpenseDAO expenseDao = new ExpenseDAO();
+
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +29,7 @@ public class Edit_Transaction_Expense extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Edit_Transaction_Expense.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static Edit_Transaction_Expense newInstance(String param1, String param2) {
         Edit_Transaction_Expense fragment = new Edit_Transaction_Expense();
         Bundle args = new Bundle();
@@ -64,12 +57,26 @@ public class Edit_Transaction_Expense extends Fragment {
         int expensePos = getArguments().getInt("expensePos");
 
         buildView(v, expensePos);
+        build_confirm_btn(v, expensePos);
 
         return v;
     }
 
 
     private void buildView(View v, int expensePos){
+
+        TextView amount = v.findViewById(R.id.amount);
+        amount.setText(Double.toString(expenseDao.get(expensePos).getValor()));
+
+        Switch isPaid_switch = v.findViewById(R.id.isPaid_switch);
+        isPaid_switch.setChecked(expenseDao.get(expensePos).getIsPaid());
+
+        AppCompatEditText description = v.findViewById(R.id.description);
+        description.setText(expenseDao.get(expensePos).getDescricao());
+
+    }
+
+    private void build_confirm_btn(View v, int expensePos){
 
 
 

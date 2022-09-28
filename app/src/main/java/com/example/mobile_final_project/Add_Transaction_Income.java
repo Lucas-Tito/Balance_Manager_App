@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mobile_final_project.dao_transaction.ReceitaDAO;
 import com.example.mobile_final_project.utils.EditAmountTransaction;
 
 import java.text.DecimalFormat;
@@ -86,7 +85,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        incomeAmount = getView().findViewById(R.id.textView2);
+        incomeAmount = getView().findViewById(R.id.amount);
 
         incomeAmount.setOnClickListener(new View.OnClickListener() {
             @Override
