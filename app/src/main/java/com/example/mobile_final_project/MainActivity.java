@@ -3,24 +3,34 @@ package com.example.mobile_final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
+
 public class MainActivity extends AppCompatActivity {
+
+    ExpenseDAO expenseDAO = new ExpenseDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        System.out.println("AMogus1" + expenseDAO.get(0).getValor());
 
         build_bottom_nav();
         build_float_btns();
@@ -125,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.transactions:
-                        fragment = new Transactions();
+                        fragment = Transactions.newInstance(expenseDAO);
                         break;
 
                     case R.id.more:

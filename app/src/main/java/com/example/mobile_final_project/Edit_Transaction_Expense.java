@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,24 +18,23 @@ import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 
 public class Edit_Transaction_Expense extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String expenseDao_KEY = "expenseDao_key";
+    ExpenseDAO expenseDao;
 
-    ExpenseDAO expenseDao = new ExpenseDAO();
+    TextView amount;
+    Switch isPaid_switch;
+    AppCompatEditText description;
 
-    private String mParam1;
-    private String mParam2;
 
     public Edit_Transaction_Expense() {
         // Required empty public constructor
     }
 
 
-    public static Edit_Transaction_Expense newInstance(String param1, String param2) {
+    public static Edit_Transaction_Expense newInstance(ExpenseDAO expenseDAO) {
         Edit_Transaction_Expense fragment = new Edit_Transaction_Expense();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.getSerializable(expenseDao_KEY);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,8 +43,8 @@ public class Edit_Transaction_Expense extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            //initialize expenseDao object when Edit_Transaction_Expenses.NewInstance is called
+            expenseDao = (ExpenseDAO) getArguments().getSerializable(expenseDao_KEY);
         }
     }
 
@@ -56,27 +56,37 @@ public class Edit_Transaction_Expense extends Fragment {
         //receive expensePos from Edit_Transaction_Activity
         int expensePos = getArguments().getInt("expensePos");
 
+        amount = v.findViewById(R.id.amount);
+        isPaid_switch = v.findViewById(R.id.isPaid_switch);
+        description = v.findViewById(R.id.description);
+
         buildView(v, expensePos);
         build_confirm_btn(v, expensePos);
 
         return v;
     }
 
-
     private void buildView(View v, int expensePos){
 
-        TextView amount = v.findViewById(R.id.amount);
         amount.setText(Double.toString(expenseDao.get(expensePos).getValor()));
-
-        Switch isPaid_switch = v.findViewById(R.id.isPaid_switch);
         isPaid_switch.setChecked(expenseDao.get(expensePos).getIsPaid());
-
-        AppCompatEditText description = v.findViewById(R.id.description);
         description.setText(expenseDao.get(expensePos).getDescricao());
 
     }
 
     private void build_confirm_btn(View v, int expensePos){
+
+        ImageButton confirm_btn = v.findViewById(R.id.confirm_btn);
+
+        confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expenseDao.get(expensePos).setValor(Double.parseDouble(amount.getText().toString()));
+                expenseDao.get(expensePos).setIsPaid(isPaid_switch.isChecked());
+                expenseDao.get(expensePos).setDescricao(description.getText().toString());
+                getActivity().finish();
+            }
+        });
 
 
 

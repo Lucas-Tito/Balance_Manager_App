@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+
 public class Edit_Transaction_Activity extends AppCompatActivity {
+
+    ExpenseDAO expenseDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +28,22 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         //-------------------------------------------+
 
+        expenseDao = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
+        System.out.println("AMogus3" + expenseDao.get(0).getValor());
+
+
         build_frame_layout();
         build_back_btn();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        //returns updated object
+        super.onDestroy();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("expenseDao", expenseDao);
+        setResult(Activity.RESULT_OK,returnIntent);
     }
 
     private void build_back_btn() {
@@ -56,12 +75,10 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
         }*/
 
         //pass received intent to fragment
-        Bundle bundle = new Bundle();
-        bundle.putInt("expensePos", getIntent().getIntExtra("expensePos", 0));
-        Fragment fragment = new Edit_Transaction_Expense();
-        fragment.setArguments(bundle);
 
+        Fragment fragment = Edit_Transaction_Expense.newInstance(expenseDao);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
+
 
     }
 

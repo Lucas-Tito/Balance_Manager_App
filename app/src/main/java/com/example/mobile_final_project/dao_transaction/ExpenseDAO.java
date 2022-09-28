@@ -2,10 +2,12 @@ package com.example.mobile_final_project.dao_transaction;
 
 import com.example.mobile_final_project.model.Despesa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ExpenseDAO {
+//class implements Serializable so it can be passed from Activities to Fragments
+public class ExpenseDAO implements Serializable {
 
     ArrayList<Despesa> expenses = new ArrayList<>();
     Date date = new Date(10, 9, 2003);

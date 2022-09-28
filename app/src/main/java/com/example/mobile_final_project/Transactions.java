@@ -20,24 +20,19 @@ import java.util.ArrayList;
 
 public class Transactions extends Fragment implements Interface_RecyclerView {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    ExpenseDAO expenseDAO = new ExpenseDAO();
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String expenseDao_KEY = "expenseDao_key";
+    private ExpenseDAO expenseDAO;
 
     public Transactions() {
         // Required empty public constructor
     }
 
 
-    public static Transactions newInstance(String param1, String param2) {
+    public static Transactions newInstance(ExpenseDAO expenseDAO) {
         Transactions fragment = new Transactions();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        //used to receive expenseDao object when called
+        args.putSerializable(expenseDao_KEY, expenseDAO);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,8 +41,8 @@ public class Transactions extends Fragment implements Interface_RecyclerView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            //initialize expenseDao object when Transactions.NewInstance is called
+            expenseDAO = (ExpenseDAO) getArguments().getSerializable(expenseDao_KEY);
         }
     }
 
@@ -56,6 +51,7 @@ public class Transactions extends Fragment implements Interface_RecyclerView {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_nav_transactions, container, false);
 
+        System.out.println("AMogus2" + expenseDAO.get(0).getValor());
         build_recyclerView(v);
 
         return v;
@@ -79,8 +75,7 @@ public class Transactions extends Fragment implements Interface_RecyclerView {
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), Edit_Transaction_Activity.class);
-        intent.putExtra("expensePos", position);
-
-        startActivity(intent);
+        intent.putExtra("expenseDao", expenseDAO);
+        startActivityForResult(intent, 101);
     }
 }

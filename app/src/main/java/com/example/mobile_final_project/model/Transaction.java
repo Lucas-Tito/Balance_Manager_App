@@ -20,6 +20,10 @@ abstract class Transaction {
 
     }
 
+    Transaction(){
+
+    }
+
 
     public String getCategoria() {
         return categoria;
