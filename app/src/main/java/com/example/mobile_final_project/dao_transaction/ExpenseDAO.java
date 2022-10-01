@@ -10,19 +10,10 @@ import java.util.Date;
 public class ExpenseDAO implements Serializable {
 
     ArrayList<Despesa> expenses = new ArrayList<>();
-    Date date = new Date(10, 9, 2003);
 
-    Despesa teste = new Despesa("teste", date, 20.03);
-    Despesa teste2 = new Despesa("teste2", date, 5.00);
+    public ExpenseDAO(Despesa despesa){
 
-    public ExpenseDAO(){
-        expenses.add(teste);
-        expenses.add(teste2);
-        expenses.add(teste2);
-        expenses.add(teste2);
-        expenses.add(teste2);
-        expenses.add(teste2);
-        expenses.add(teste2);
+            expenses.add(despesa);
     }
 
     public void addExpense(Despesa despesa){

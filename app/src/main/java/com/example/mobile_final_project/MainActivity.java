@@ -15,15 +15,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.model.Despesa;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO();
+    ExpenseDAO expenseDAO = new ExpenseDAO(new Despesa("teste", new Date(10, 9, 2003), 20.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

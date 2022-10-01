@@ -68,14 +68,13 @@ public class Transactions extends Fragment implements Interface_RecyclerView {
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
     }
 
     //click listener for recycleView items
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), Edit_Transaction_Activity.class);
-        intent.putExtra("expenseDao", expenseDAO);
-        startActivityForResult(intent, 101);
+        intent.putExtra("expenseDao", this.expenseDAO);
+        startActivity(intent);
     }
 }

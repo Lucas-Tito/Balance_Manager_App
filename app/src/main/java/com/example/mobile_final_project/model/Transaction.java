@@ -1,8 +1,9 @@
 package com.example.mobile_final_project.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-abstract class Transaction {
+abstract class Transaction implements Serializable {
 
     /*commented while data base isn't developed*/
     /*private int id;*/
@@ -20,9 +21,7 @@ abstract class Transaction {
 
     }
 
-    Transaction(){
 
-    }
 
 
     public String getCategoria() {
