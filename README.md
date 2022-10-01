@@ -2,4 +2,4 @@
 
 ### ToDo list (Tito)
 
-+ janky abstract class (Transiction), also RecyclerView adapter only creates expenses itens.
++ janky abstract class (Transactions), also RecyclerView adapter only creates expenses items.
