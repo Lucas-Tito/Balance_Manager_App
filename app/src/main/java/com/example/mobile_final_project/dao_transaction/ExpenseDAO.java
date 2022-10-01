@@ -1,24 +1,26 @@
 package com.example.mobile_final_project.dao_transaction;
 
-import com.example.mobile_final_project.model.Despesa;
+import com.example.mobile_final_project.model.Expense;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 //class implements Serializable so it can be passed from Activities to Fragments
 public class ExpenseDAO implements Serializable {
 
-    ArrayList<Despesa> expenses = new ArrayList<>();
+    ArrayList<Expense> expenses = new ArrayList<>();
+    Double total_amount = 0.00;
 
-    public ExpenseDAO(Despesa despesa){
+    public ExpenseDAO(Expense expense){
 
-            expenses.add(despesa);
+        addExpense(expense);
+
     }
 
-    public void addExpense(Despesa despesa){
+    public void addExpense(Expense expense){
 
-        expenses.add(despesa);
+        expenses.add(expense);
+        total_amount += expense.getValor();
 
     }
 
@@ -38,12 +40,16 @@ public class ExpenseDAO implements Serializable {
     }
 
 
-    public Despesa get(int pos){
+    public Expense get(int pos){
         return expenses.get(pos);
     }
 
-    public ArrayList<Despesa> getAll(){
+    public ArrayList<Expense> getAll(){
         return expenses;
+    }
+
+    public Double getTotal_amount(){
+        return total_amount;
     }
 
 }

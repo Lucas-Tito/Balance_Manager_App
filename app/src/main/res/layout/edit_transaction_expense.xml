@@ -29,8 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:text="$0.00"
-            android:textSize="30sp"
+            android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.517"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -71,7 +72,7 @@
                         android:src="@drawable/add_transaction_paid_ic" />
 
                     <TextView
-                        android:id="@+id/isPaid"
+                        android:id="@+id/isPaid_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

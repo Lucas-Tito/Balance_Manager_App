@@ -1,13 +1,17 @@
 package com.example.mobile_final_project;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 
 public class Add_Transaction_Activity extends AppCompatActivity {
 
@@ -27,6 +31,7 @@ public class Add_Transaction_Activity extends AppCompatActivity {
 
     }
 
+
     private void build_back_btn() {
 
         ImageButton back_btn = findViewById(R.id.back_btn);
@@ -45,9 +50,11 @@ public class Add_Transaction_Activity extends AppCompatActivity {
 
         Fragment fragmentToStart = null;
         TextView toolbar_title = findViewById(R.id.toolbar_title);
+        ExpenseDAO expenseDAO = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
+
 
         if(getIntent().getIntExtra("fragToStart", 0) == 1){
-            fragmentToStart = new Add_Transaction_Expense();
+            fragmentToStart = Add_Transaction_Expense.newInstance(expenseDAO);
             toolbar_title.setText(R.string.toolbar_title_expense);
         }
         else if(getIntent().getIntExtra("fragToStart", 0) == 2){

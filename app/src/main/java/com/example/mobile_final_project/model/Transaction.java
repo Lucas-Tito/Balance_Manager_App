@@ -21,6 +21,15 @@ abstract class Transaction implements Serializable {
 
     }
 
+    Transaction(String descricao, Date data, double valor, boolean isPaid){
+
+        this.descricao = descricao;
+        this.dataEntrada = data;
+        this.valor = valor;
+        this.isPaid = isPaid;
+
+    }
+
 
 
 

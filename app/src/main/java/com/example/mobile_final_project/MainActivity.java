@@ -1,13 +1,12 @@
 package com.example.mobile_final_project;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,32 +14,41 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
-import com.example.mobile_final_project.model.Despesa;
+import com.example.mobile_final_project.model.Expense;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO(new Despesa("teste", new Date(10, 9, 2003), 20.03));
+    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense("teste", new Date(10, 9, 2003), 20.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("AMogus1" + expenseDAO.get(0).getValor());
-
         build_bottom_nav();
         build_float_btns();
     }
 
 
+    //Override method to receive updated expenses from other activities
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101) {
+            if(resultCode == MainActivity.RESULT_OK){
+                expenseDAO = (ExpenseDAO) data.getSerializableExtra("newExpenseDao");
+            }
+
+        }
+    }
+
     private boolean fab_main_clicked = false;
-    public void build_float_btns(){
+    private void build_float_btns(){
 
         FloatingActionButton fab_main, fab_expense, fab_income;
         fab_main = findViewById(R.id.float_btn_main);
@@ -99,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 1);
-                startActivity(intent);
+                intent.putExtra("expenseDao", expenseDAO);
+                startActivityForResult(intent, 101);
             }
         });
 
@@ -108,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 2);
-                startActivity(intent);
+                intent.putExtra("expenseDao", expenseDAO);
+                startActivityForResult(intent, 101);
             }
         });
 
@@ -117,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void build_bottom_nav(){
+    private void build_bottom_nav(){
 
         BottomNavigationView bottom_nav_view;
 
         bottom_nav_view = findViewById(R.id.bottomNavigationView);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new Home()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, Home.newInstance(Double.toString(expenseDAO.getTotal_amount()))).commit();
         bottom_nav_view.setSelectedItemId(R.id.home);
 
         bottom_nav_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -133,11 +143,11 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.home:
-                        fragment = new Home();
+                        fragment = Home.newInstance(Double.toString(expenseDAO.getTotal_amount()));
                         break;
 
                     case R.id.transactions:
-                        fragment = Transactions.newInstance(expenseDAO);
+                        fragment = Transactions_List.newInstance(expenseDAO);
                         break;
 
                     case R.id.more:

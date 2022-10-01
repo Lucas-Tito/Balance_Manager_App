@@ -10,6 +10,7 @@
 
     <string name="hello_blank_fragment">Hey, you\'re in home</string>
 
+    <string name="currency">$</string>
 
     <!-- activity_main -->
     <string name="main_fab_desc">this is a button to add expenses or incomes</string>

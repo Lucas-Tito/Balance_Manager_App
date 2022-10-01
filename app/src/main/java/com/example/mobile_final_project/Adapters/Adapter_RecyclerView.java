@@ -10,17 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobile_final_project.R;
-import com.example.mobile_final_project.model.Despesa;
+import com.example.mobile_final_project.model.Expense;
 
 import java.util.ArrayList;
 
 public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerView.MyViewHolder> {
 
-    ArrayList<Despesa> expenses = new ArrayList<>();
+    ArrayList<Expense> expenses = new ArrayList<>();
     Context context;
     private final Interface_RecyclerView recyclerViewInterface;
 
-    public Adapter_RecyclerView(Context ct, ArrayList<Despesa> expenses, Interface_RecyclerView recyclerViewInterface){
+    public Adapter_RecyclerView(Context ct, ArrayList<Expense> expenses, Interface_RecyclerView recyclerViewInterface){
         this.expenses = expenses;
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;

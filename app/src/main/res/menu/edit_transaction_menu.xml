@@ -6,7 +6,7 @@
         android:title="Remove"
         android:icon="@drawable/edit_transaction_trash_ic"
         android:id="@+id/trash"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         app:iconTint="@color/white"/>
 
 
