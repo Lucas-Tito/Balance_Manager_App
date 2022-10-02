@@ -45,9 +45,15 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_nav_home, container, false);
 
-        build_balance_dashboard(v);
-
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        build_balance_dashboard(getView());
     }
 
 
