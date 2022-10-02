@@ -104,7 +104,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
 
-                Income newIncome = new Income(description, new Date(), amount, isPaid);
+                Income newIncome = new Income(incomeDAO.getSize(), description, new Date(), amount, isPaid);
                 incomeDAO.addIncome(newIncome);
 
                 Intent returnIntent = new Intent();

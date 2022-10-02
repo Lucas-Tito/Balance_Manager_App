@@ -25,8 +25,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense("teste_expense", new Date(10, 9, 2003), 20.03));
-    IncomeDAO incomeDAO = new IncomeDAO(new Income("teste_income", new Date(10, 9, 2003), 10.03));
+    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense(0, "teste_expense", new Date(10, 9, 2003), 20.03));
+    IncomeDAO incomeDAO = new IncomeDAO(new Income(0, "teste_income", new Date(10, 9, 2003), 10.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +43,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 101) {
-            if(resultCode == MainActivity.RESULT_OK){
+        if (requestCode == 101)
+            if(resultCode == MainActivity.RESULT_OK)
                 expenseDAO = (ExpenseDAO) data.getSerializableExtra("newExpenseDao");
-            }
-        }
 
-        if (requestCode == 102) {
-            if(resultCode == MainActivity.RESULT_OK){
+
+        if (requestCode == 102)
+            if(resultCode == MainActivity.RESULT_OK)
                 incomeDAO = (IncomeDAO) data.getSerializableExtra("newIncomeDao");
-            }
-        }
+
+
+        //refreshes fragment to show changes on list
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, Transactions_List.newInstance(expenseDAO, incomeDAO)).commit();
     }
 
     private boolean fab_main_clicked = false;
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.transactions:
-                        fragment = Transactions_List.newInstance(expenseDAO);
+                        fragment = Transactions_List.newInstance(expenseDAO, incomeDAO);
                         break;
 
                     case R.id.more:

@@ -8,12 +8,12 @@ public class Expense extends Transaction implements Serializable {
 
 
 
-    public Expense(String descricao, Date data, double valor) {
-        super(descricao, data, valor);
+    public Expense(int id, String description, Date date, double value) {
+        super(id, description, date, value);
     }
 
-    public Expense(String descricao, Date data, double valor, boolean isPaid) {
-        super(descricao, data, valor, isPaid);
+    public Expense(int id, String description, Date date, double value, boolean isPaid) {
+        super(id, description, date, value, isPaid);
     }
 
 }

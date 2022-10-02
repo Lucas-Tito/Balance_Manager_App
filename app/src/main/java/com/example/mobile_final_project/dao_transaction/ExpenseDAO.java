@@ -20,7 +20,7 @@ public class ExpenseDAO implements Serializable {
     public void addExpense(Expense expense){
 
         expenses.add(expense);
-        total_amount += expense.getValor();
+        total_amount += expense.getValue();
 
     }
 
@@ -32,16 +32,20 @@ public class ExpenseDAO implements Serializable {
 
     public void editExpense(int id, int amount, boolean isPaid, String description, String category){
 
-        expenses.get(id).setValor(amount);
+        expenses.get(id).setValue(amount);
         expenses.get(id).setIsPaid(isPaid);
-        expenses.get(id).setDescricao(description);
-        expenses.get(id).setCategoria(category);
+        expenses.get(id).setDescription(description);
+        expenses.get(id).setCategory(category);
 
     }
 
 
     public Expense get(int pos){
         return expenses.get(pos);
+    }
+
+    public int getSize(){
+        return expenses.size();
     }
 
     public ArrayList<Expense> getAll(){

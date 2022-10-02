@@ -1,9 +1,9 @@
 package com.example.mobile_final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -69,9 +69,9 @@ public class Edit_Transaction_Expense extends Fragment {
 
     private void buildView(int expensePos){
 
-        amount.setText(getString(R.string.currency) + Double.toString(expenseDao.get(expensePos).getValor()));
+        amount.setText(getString(R.string.currency) + Double.toString(expenseDao.get(expensePos).getValue()));
         isPaid_switch.setChecked(expenseDao.get(expensePos).getIsPaid());
-        description.setText(expenseDao.get(expensePos).getDescricao());
+        description.setText(expenseDao.get(expensePos).getDescription());
 
     }
 
@@ -82,9 +82,17 @@ public class Edit_Transaction_Expense extends Fragment {
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                expenseDao.get(expensePos).setValor(Double.parseDouble(amount.getText().toString()));
+
+                //Removes currency symbol from string to prevent error parsing to double
+                String str_amount = amount.getText().toString().replace(getText(R.string.currency), "");
+
+                expenseDao.get(expensePos).setValue(Double.parseDouble(str_amount));
                 expenseDao.get(expensePos).setIsPaid(isPaid_switch.isChecked());
-                expenseDao.get(expensePos).setDescricao(description.getText().toString());
+                expenseDao.get(expensePos).setDescription(description.getText().toString());
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("newExpenseDao", expenseDao);
+                getActivity().setResult(getActivity().RESULT_OK, returnIntent);
                 getActivity().finish();
             }
         });

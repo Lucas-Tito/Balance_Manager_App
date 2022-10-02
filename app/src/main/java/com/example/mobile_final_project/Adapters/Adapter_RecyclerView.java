@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobile_final_project.R;
 import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.model.Transaction;
 
 import java.util.ArrayList;
 
 public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerView.MyViewHolder> {
 
-    ArrayList<Expense> expenses = new ArrayList<>();
+    ArrayList<Transaction> united_transactions = new ArrayList<>();
     Context context;
     private final Interface_RecyclerView recyclerViewInterface;
 
-    public Adapter_RecyclerView(Context ct, ArrayList<Expense> expenses, Interface_RecyclerView recyclerViewInterface){
-        this.expenses = expenses;
+    public Adapter_RecyclerView(Context ct, ArrayList<Transaction> united_transactions, Interface_RecyclerView recyclerViewInterface){
+        this.united_transactions = united_transactions;
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;
     }
@@ -38,16 +39,16 @@ public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerV
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.date_label.setText(expenses.get(position).getData().toString());
-        holder.description_label.setText(expenses.get(position).getDescricao());
-        holder.category_label.setText(expenses.get(position).getCategoria());
-        holder.amount_label.setText(String.valueOf(expenses.get(position).getValor()));
+        holder.date_label.setText(united_transactions.get(position).getDate().toString());
+        holder.description_label.setText(united_transactions.get(position).getDescription());
+        holder.category_label.setText(united_transactions.get(position).getCategory());
+        holder.amount_label.setText(String.valueOf(united_transactions.get(position).getValue()));
 
     }
 
     @Override
     public int getItemCount() {
-        return expenses.size();
+        return united_transactions.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -66,11 +67,16 @@ public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerV
                 public void onClick(View view) {
                     if(recyclerViewInterface!=null){
                         int pos = getAdapterPosition();
+                        Transaction transaction = united_transactions.get(pos);
+                        pos = transaction.getId();
+                        String fragToStart;
 
-                        //if position is valid
-                        if(pos!=RecyclerView.NO_POSITION){
-                            recyclerViewInterface.onItemClick(pos);
-                        }
+                        if(transaction instanceof Expense)
+                            fragToStart = "editExpense";
+                        else
+                            fragToStart = "editIncome";
+
+                        recyclerViewInterface.onItemClick(pos, fragToStart);
                     }
                 }
             });

@@ -32,7 +32,6 @@ public class Add_Transaction_Activity extends AppCompatActivity {
 
     }
 
-
     private void build_back_btn() {
 
         ImageButton back_btn = findViewById(R.id.back_btn);

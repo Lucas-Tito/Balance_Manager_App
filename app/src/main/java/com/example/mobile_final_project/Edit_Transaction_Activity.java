@@ -13,10 +13,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 
 public class Edit_Transaction_Activity extends AppCompatActivity {
 
     private ExpenseDAO expenseDao;
+    private IncomeDAO incomeDao;
     private int transaction_pos;
 
     @Override
@@ -32,6 +34,7 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
         //-------------------------------------------+
 
         expenseDao = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
+        incomeDao = (IncomeDAO) getIntent().getSerializableExtra("incomeDao");
         transaction_pos = getIntent().getIntExtra("transaction_pos", 0);
 
         build_frame_layout();
@@ -65,22 +68,16 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
 
     private void build_frame_layout(){
 
-/*        Fragment fragmentToStart = null;
-        TextView toolbar_title = findViewById(R.id.toolbar_title);
+        Fragment fragmentToStart = null;
 
-        if(getIntent().getIntExtra("fragToStart", 0) == 1){
-            fragmentToStart = new Add_Transaction_Expense();
-            toolbar_title.setText(R.string.toolbar_title_expense);
-        }
-        else if(getIntent().getIntExtra("fragToStart", 0) == 2){
-            fragmentToStart = new Add_Transaction_Income();
-            toolbar_title.setText(R.string.toolbar_title_income);
-        }*/
+        if(getIntent().getStringExtra("frag_key").equals("editExpense"))
+            fragmentToStart = Edit_Transaction_Expense.newInstance(expenseDao, transaction_pos);
 
-        //pass received intent to fragment
+        else
+            fragmentToStart = Edit_Transaction_Income.newInstance(incomeDao, transaction_pos);
 
-        Fragment fragment = Edit_Transaction_Expense.newInstance(expenseDao, transaction_pos);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragment).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragmentToStart).commit();
 
 
     }

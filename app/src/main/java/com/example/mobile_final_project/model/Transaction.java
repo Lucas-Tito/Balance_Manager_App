@@ -3,29 +3,28 @@ package com.example.mobile_final_project.model;
 import java.io.Serializable;
 import java.util.Date;
 
-abstract class Transaction implements Serializable {
+public class Transaction implements Serializable {
 
-    /*commented while data base isn't developed*/
-    /*private int id;*/
-    private String descricao, categoria;
-    private Date dataEntrada;
-    private double valor;
+    private int id;
+    private String description, category;
+    private Date entryDate;
+    private double value;
     private boolean isPaid;
 
-    Transaction(String descricao, Date data, double valor){
+    Transaction(int id, String description, Date date, double value){
 
-        this.descricao = descricao;
-        this.dataEntrada = data;
-        this.valor = valor;
+        this.description = description;
+        this.entryDate = date;
+        this.value = value;
         this.isPaid = true;
 
     }
 
-    Transaction(String descricao, Date data, double valor, boolean isPaid){
+    Transaction(int id, String description, Date date, double value, boolean isPaid){
 
-        this.descricao = descricao;
-        this.dataEntrada = data;
-        this.valor = valor;
+        this.description = description;
+        this.entryDate = date;
+        this.value = value;
         this.isPaid = isPaid;
 
     }
@@ -33,44 +32,45 @@ abstract class Transaction implements Serializable {
 
 
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-/*    public int getId() {
+    public int getId() {
         return id;
     }
 
+    /*
     public void setId(int id) {
         this.id = id;
     }*/
 
-    public double getValor() {
-        return valor;
+    public double getValue() {
+        return value;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValue(double value) {
+        this.value = value;
     }
 
-    public Date getData() {
-        return dataEntrada;
+    public Date getDate() {
+        return entryDate;
     }
 
-    public void setData(Date data) {
-        this.dataEntrada = data;
+    public void setDate(Date date) {
+        this.entryDate = date;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean getIsPaid(){
@@ -85,9 +85,9 @@ abstract class Transaction implements Serializable {
     @Override
     public String toString() {
         return "Receita{" +
-                "valor=" + valor +
-                ", dataEntrada=" + dataEntrada +
-                ", descricao='" + descricao + '\'' +
+                "valor=" + value +
+                ", dataEntrada=" + entryDate +
+                ", descricao='" + description + '\'' +
                 '}';
     }
 }

@@ -43,9 +43,10 @@ public class ReceitaItem extends AppCompatActivity {
         Date dataEntradaReceita = Date.valueOf(txtDataEntradaReceita.getText().toString());
         String descricaoReceita = txtValorReceita.getText().toString();
 
-        Income income = new Income(descricaoReceita,dataEntradaReceita,valorReceita);
-
-        listIncome.add(income);
+//        commented while activity isn't in use
+//        Income income = new Income(descricaoReceita,dataEntradaReceita,valorReceita);
+//
+//        listIncome.add(income);
 
     }
 }

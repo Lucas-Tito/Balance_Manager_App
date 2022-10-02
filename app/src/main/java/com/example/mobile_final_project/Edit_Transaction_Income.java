@@ -1,5 +1,6 @@
 package com.example.mobile_final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -69,9 +70,9 @@ public class Edit_Transaction_Income extends Fragment {
 
     private void buildView(int expensePos){
 
-        amount.setText(getString(R.string.currency) + Double.toString(incomeDao.get(expensePos).getValor()));
+        amount.setText(getString(R.string.currency) + Double.toString(incomeDao.get(expensePos).getValue()));
         isReceived_switch.setChecked(incomeDao.get(expensePos).getIsPaid());
-        description.setText(incomeDao.get(expensePos).getDescricao());
+        description.setText(incomeDao.get(expensePos).getDescription());
 
     }
 
@@ -82,9 +83,17 @@ public class Edit_Transaction_Income extends Fragment {
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                incomeDao.get(incomePos).setValor(Double.parseDouble(amount.getText().toString()));
+
+                //Removes currency symbol from string to prevent error parsing to double
+                String str_amount = amount.getText().toString().replace(getText(R.string.currency), "");
+
+                incomeDao.get(incomePos).setValue(Double.parseDouble(str_amount));
                 incomeDao.get(incomePos).setIsPaid(isReceived_switch.isChecked());
-                incomeDao.get(incomePos).setDescricao(description.getText().toString());
+                incomeDao.get(incomePos).setDescription(description.getText().toString());
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("newIncomeDao", incomeDao);
+                getActivity().setResult(getActivity().RESULT_OK, returnIntent);
                 getActivity().finish();
             }
         });

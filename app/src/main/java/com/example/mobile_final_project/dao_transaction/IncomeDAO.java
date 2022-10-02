@@ -1,6 +1,5 @@
 package com.example.mobile_final_project.dao_transaction;
 
-import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Income;
 
 import java.io.Serializable;
@@ -20,7 +19,7 @@ public class IncomeDAO implements Serializable {
     public void addIncome(Income income){
 
         incomes.add(income);
-        total_amount += income.getValor();
+        total_amount += income.getValue();
 
     }
 
@@ -32,16 +31,20 @@ public class IncomeDAO implements Serializable {
 
     public void editExpense(int id, int amount, boolean isPaid, String description, String category){
 
-        incomes.get(id).setValor(amount);
+        incomes.get(id).setValue(amount);
         incomes.get(id).setIsPaid(isPaid);
-        incomes.get(id).setDescricao(description);
-        incomes.get(id).setCategoria(category);
+        incomes.get(id).setDescription(description);
+        incomes.get(id).setCategory(category);
 
     }
 
 
     public Income get(int pos){
         return incomes.get(pos);
+    }
+
+    public int getSize(){
+        return incomes.size();
     }
 
     public ArrayList<Income> getAll(){

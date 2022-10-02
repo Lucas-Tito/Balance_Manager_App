@@ -73,7 +73,7 @@ public class Add_Transaction_Expense extends Fragment {
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
 
-                Expense newExpense = new Expense(description, new Date(), amount, isPaid);
+                Expense newExpense = new Expense(expenseDAO.getSize(), description, new Date(), amount, isPaid);
                 expenseDAO.addExpense(newExpense);
 
                 Intent returnIntent = new Intent();
