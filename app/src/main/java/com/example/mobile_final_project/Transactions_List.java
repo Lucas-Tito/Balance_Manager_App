@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.mobile_final_project.Adapters.Adapter_RecyclerView;
 import com.example.mobile_final_project.Adapters.Interface_RecyclerView;
@@ -61,11 +62,27 @@ public class Transactions_List extends Fragment implements Interface_RecyclerVie
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_nav_transactions, container, false);
 
+
+        build_labels(v);
         build_recyclerView(v);
 
         return v;
     }
 
+
+    public void build_labels(View v){
+
+        //Removes currency symbol from string to prevent error parsing to double
+        String str_incomes_amount = incomeDAO.getTotal_amount().toString();
+        String str_expenses_amount = expenseDAO.getTotal_amount().toString();
+
+        Double total_amount_value = Double.valueOf(Math.round(Double.parseDouble(str_incomes_amount.replace(getText(R.string.currency), ""))
+                - Double.parseDouble(str_expenses_amount.replace(getText(R.string.currency), ""))));
+
+        TextView current_balance_label = v.findViewById(R.id.current_balance_amount);
+        current_balance_label.setText(getText(R.string.currency) + total_amount_value.toString());
+
+    }
 
     private ArrayList<Transaction> united_transactions = new ArrayList<>();
     private void build_recyclerView(View v) {
