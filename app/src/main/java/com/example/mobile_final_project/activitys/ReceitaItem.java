@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.R;
-import com.example.mobile_final_project.model.Receita;
+import com.example.mobile_final_project.model.Income;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class ReceitaItem extends AppCompatActivity {
     private TextView txtValorReceita,txtDataEntradaReceita,txtDescricaoReceita ;
     private EditText edtValorReceita,edtDataEntradaReceita,edtDescricaoReceita;
 
-    private List<Receita> listReceita = new ArrayList<Receita>();
+    private List<Income> listIncome = new ArrayList<Income>();
 
 
     @Override
@@ -43,9 +43,9 @@ public class ReceitaItem extends AppCompatActivity {
         Date dataEntradaReceita = Date.valueOf(txtDataEntradaReceita.getText().toString());
         String descricaoReceita = txtValorReceita.getText().toString();
 
-        Receita receita = new Receita(descricaoReceita,dataEntradaReceita,valorReceita);
+        Income income = new Income(descricaoReceita,dataEntradaReceita,valorReceita);
 
-        listReceita.add(receita);
+        listIncome.add(income);
 
     }
 }

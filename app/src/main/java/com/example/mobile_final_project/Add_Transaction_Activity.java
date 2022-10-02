@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 
 public class Add_Transaction_Activity extends AppCompatActivity {
 
@@ -50,15 +51,15 @@ public class Add_Transaction_Activity extends AppCompatActivity {
 
         Fragment fragmentToStart = null;
         TextView toolbar_title = findViewById(R.id.toolbar_title);
-        ExpenseDAO expenseDAO = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
-
 
         if(getIntent().getIntExtra("fragToStart", 0) == 1){
+            ExpenseDAO expenseDAO = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
             fragmentToStart = Add_Transaction_Expense.newInstance(expenseDAO);
             toolbar_title.setText(R.string.toolbar_title_expense);
         }
         else if(getIntent().getIntExtra("fragToStart", 0) == 2){
-            fragmentToStart = new Add_Transaction_Income();
+            IncomeDAO incomeDAO = (IncomeDAO) getIntent().getSerializableExtra("incomeDao");
+            fragmentToStart = Add_Transaction_Income.newInstance(incomeDAO);
             toolbar_title.setText(R.string.toolbar_title_income);
         }
 

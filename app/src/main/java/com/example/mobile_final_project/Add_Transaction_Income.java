@@ -1,6 +1,7 @@
 package com.example.mobile_final_project;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,24 +11,25 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.dao_transaction.IncomeDAO;
+import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.utils.EditAmountTransaction;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Date;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Add_Transaction_Income#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Add_Transaction_Income extends Fragment implements DialogCloseListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String incomeDAO_KEY = "incomeDAO_KEY";
+    private IncomeDAO incomeDAO;
 
     //private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
@@ -39,28 +41,14 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     //Componentes do layout
     private TextView incomeAmount;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public Add_Transaction_Income() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Add_Income_Screen.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Add_Transaction_Income newInstance(String param1, String param2) {
+    public static Add_Transaction_Income newInstance(IncomeDAO incomeDAO) {
         Add_Transaction_Income fragment = new Add_Transaction_Income();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(incomeDAO_KEY, incomeDAO);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,8 +57,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            incomeDAO = (IncomeDAO) getArguments().getSerializable(incomeDAO_KEY);
         }
     }
 
@@ -78,7 +65,11 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.add_transaction_income, container, false);
+        View v = inflater.inflate(R.layout.add_transaction_income, container, false);
+
+        build_confirm_btn(v);
+
+        return v;
     }
 
     @Override
@@ -94,6 +85,34 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
             }
         });
 
+    }
+
+    public void build_confirm_btn(View v){
+
+        ImageButton confirm_btn = v.findViewById(R.id.confirm_btn);
+        Switch isPaid_switch = v.findViewById(R.id.isPaid_switch);
+        EditText description_label = v.findViewById(R.id.description);
+
+        confirm_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Removes currency symbol from string to prevent error parsing to double
+                String str_amount = incomeAmount.getText().toString().replace(getText(R.string.currency), "");
+
+                Double amount = Double.parseDouble(str_amount);
+                boolean isPaid = isPaid_switch.isChecked();
+                String description = description_label.getText().toString();
+
+                Income newIncome = new Income(description, new Date(), amount, isPaid);
+                incomeDAO.addIncome(newIncome);
+
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("newIncomeDao", incomeDAO);
+                getActivity().setResult(getActivity().RESULT_OK, returnIntent);
+                getActivity().finish();
+            }
+        });
 
     }
 

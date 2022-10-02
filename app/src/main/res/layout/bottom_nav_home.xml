@@ -68,7 +68,7 @@
                     android:text="@string/balance_label" />
 
                 <TextView
-                    android:id="@+id/balance_amount"
+                    android:id="@+id/total_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -127,7 +127,7 @@
                                 android:textSize="16sp" />
 
                             <TextView
-                                android:id="@+id/textView4"
+                                android:id="@+id/incomes_amount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

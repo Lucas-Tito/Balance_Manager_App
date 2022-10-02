@@ -21,7 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.example.mobile_final_project.dao_transaction.ReceitaDAO;
+import com.example.mobile_final_project.dao_transaction.IncomeDAO;
+import com.example.mobile_final_project.model.Income;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.text.DecimalFormat;
@@ -109,7 +110,7 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
             public void onClick(View view) {
                 System.out.println("ENTROU NO ONCLICK DE SALVAR");
                 Double amount = Double.parseDouble(edtAmountValue.getText().toString());
-                ReceitaDAO.amount = amount;
+                Income.amount = amount;
 
                 dismiss();
             }
@@ -121,9 +122,9 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
     public void onDismiss(@NonNull DialogInterface dialog) {
         Activity activity = getActivity();
         TextView incomeAmount = activity.findViewById(R.id.amount);
-        if(ReceitaDAO.amount != null)
+        if(Income.amount != null)
         {
-            incomeAmount.setText(REAL_FORMATTER.format(ReceitaDAO.amount));
+            incomeAmount.setText(REAL_FORMATTER.format(Income.amount));
         }
 
         System.out.println("ENTROU NO ONDISMISS");

@@ -22,8 +22,6 @@ import java.util.Date;
 public class Add_Transaction_Expense extends Fragment {
 
     private static final String expenseDAO_KEY = "expenseDAO_KEY";
-
-
     private ExpenseDAO expenseDAO;
 
     public Add_Transaction_Expense() {

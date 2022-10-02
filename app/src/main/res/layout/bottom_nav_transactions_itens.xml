@@ -80,7 +80,7 @@
                     android:text="$0.00" />
 
                 <ImageView
-                    android:id="@+id/isPaid_label"
+                    android:id="@+id/isReceived_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/add_transaction_btn_shape"

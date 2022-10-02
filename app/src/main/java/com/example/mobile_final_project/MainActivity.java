@@ -14,7 +14,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.model.Income;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,7 +25,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense("teste", new Date(10, 9, 2003), 20.03));
+    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense("teste_expense", new Date(10, 9, 2003), 20.03));
+    IncomeDAO incomeDAO = new IncomeDAO(new Income("teste_income", new Date(10, 9, 2003), 10.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +42,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == 101) {
             if(resultCode == MainActivity.RESULT_OK){
                 expenseDAO = (ExpenseDAO) data.getSerializableExtra("newExpenseDao");
             }
+        }
 
+        if (requestCode == 102) {
+            if(resultCode == MainActivity.RESULT_OK){
+                incomeDAO = (IncomeDAO) data.getSerializableExtra("newIncomeDao");
+            }
         }
     }
 
@@ -117,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 2);
-                intent.putExtra("expenseDao", expenseDAO);
-                startActivityForResult(intent, 101);
+                intent.putExtra("incomeDao", incomeDAO);
+                startActivityForResult(intent, 102);
             }
         });
 
@@ -132,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottom_nav_view;
 
         bottom_nav_view = findViewById(R.id.bottomNavigationView);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, Home.newInstance(Double.toString(expenseDAO.getTotal_amount()))).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, Home.newInstance(Double.toString(expenseDAO.getTotal_amount()), Double.toString(incomeDAO.getTotal_amount()))).commit();
         bottom_nav_view.setSelectedItemId(R.id.home);
 
         bottom_nav_view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -143,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.home:
-                        fragment = Home.newInstance(Double.toString(expenseDAO.getTotal_amount()));
+                        fragment = Home.newInstance(Double.toString(expenseDAO.getTotal_amount()), Double.toString(incomeDAO.getTotal_amount()));
                         break;
 
                     case R.id.transactions:

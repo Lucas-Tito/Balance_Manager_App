@@ -33,7 +33,7 @@ tools:context=".activitys.ReceitaItem"
                 android:id="@+id/txtViewTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nova receita"
+                android:text="Nova income"
                 android:textColor="@color/Black"
                 android:textSize="20sp" />
 

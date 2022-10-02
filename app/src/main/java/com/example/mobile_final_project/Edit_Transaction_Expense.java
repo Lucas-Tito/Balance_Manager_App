@@ -60,13 +60,14 @@ public class Edit_Transaction_Expense extends Fragment {
         isPaid_switch = v.findViewById(R.id.isPaid_switch);
         description = v.findViewById(R.id.description);
 
-        buildView(v, transaction_pos);
+        buildView(transaction_pos);
         build_confirm_btn(v, transaction_pos);
 
         return v;
+
     }
 
-    private void buildView(View v, int expensePos){
+    private void buildView(int expensePos){
 
         amount.setText(getString(R.string.currency) + Double.toString(expenseDao.get(expensePos).getValor()));
         isPaid_switch.setChecked(expenseDao.get(expensePos).getIsPaid());
@@ -87,8 +88,6 @@ public class Edit_Transaction_Expense extends Fragment {
                 getActivity().finish();
             }
         });
-
-
 
     }
 }
