@@ -9,3 +9,4 @@
 
 #### Minor Issues
 + need to create a attribute on main acitivty to hold total amount (income-expense) to other activities only need to access this attribute to protrai it.
++ (in Edita_Transaction_Activity) make fragToStart a global variable, since it's use everywhere in this activity
