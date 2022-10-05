@@ -2,8 +2,8 @@
 
 ### ToDo list (Tito)
 
++ amount values aren't updating after deleting a transaction.
 + recycleView need to implement a list view in recycleViewItem (for only one date by day is showed).
-+ need to implement delete transaction.
 + janky abstract class (Transactions).
 + Edit Expense/Income aren't using editExpense/Income methods from their respectives DAOs.
 
