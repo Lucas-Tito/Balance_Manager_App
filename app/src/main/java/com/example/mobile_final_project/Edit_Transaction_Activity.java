@@ -4,13 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
@@ -39,6 +38,7 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
 
         build_frame_layout();
         build_back_btn();
+        build_delete_btn();
 
     }
 
@@ -65,6 +65,40 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
 
     }
 
+
+    private void build_delete_btn(){
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()){
+
+                    case R.id.trash:
+                        if(getIntent().getStringExtra("frag_key").equals("editExpense")){
+                            expenseDao.removeExpense(transaction_pos);
+                            Intent returnIntent = new Intent();
+                            returnIntent.putExtra("newExpenseDao", expenseDao);
+                            setResult(RESULT_OK, returnIntent);
+                            finish();
+                        }
+                        else{
+                            incomeDao.removeIncome(transaction_pos);
+                            Intent returnIntent = new Intent();
+                            returnIntent.putExtra("newIncomeDao", incomeDao);
+                            setResult(RESULT_OK, returnIntent);
+                            finish();
+                        }
+
+                }
+
+                return false;
+            }
+        });
+    }
 
     private void build_frame_layout(){
 

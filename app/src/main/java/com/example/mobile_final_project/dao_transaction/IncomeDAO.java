@@ -23,13 +23,13 @@ public class IncomeDAO implements Serializable {
 
     }
 
-    public void removeExpense(int id){
+    public void removeIncome(int id){
 
         incomes.remove(id);
 
     }
 
-    public void editExpense(int id, int amount, boolean isPaid, String description, String category){
+    public void editIncome(int id, int amount, boolean isPaid, String description, String category){
 
         incomes.get(id).setValue(amount);
         incomes.get(id).setIsPaid(isPaid);
