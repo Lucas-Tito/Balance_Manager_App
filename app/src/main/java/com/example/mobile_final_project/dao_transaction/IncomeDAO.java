@@ -25,6 +25,7 @@ public class IncomeDAO implements Serializable {
 
     public void removeIncome(int id){
 
+        total_amount -= incomes.get(id).getValue();
         incomes.remove(id);
 
     }

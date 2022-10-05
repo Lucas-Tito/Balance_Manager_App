@@ -26,6 +26,7 @@ public class ExpenseDAO implements Serializable {
 
     public void removeExpense(int id){
 
+        total_amount -= expenses.get(id).getValue();
         expenses.remove(id);
 
     }
