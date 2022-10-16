@@ -8,5 +8,6 @@
 
 
 #### Minor Issues
++ use  myAdapter.notifyDataSetChanged() when refreshing recycle view.
 + need to create a attribute on main acitivty to hold total amount (income-expense) to other activities only need to access this attribute to protrai it.
 + (in Edit_Transaction_Activity) make fragToStart a global variable, since it's used everywhere in this activity.
