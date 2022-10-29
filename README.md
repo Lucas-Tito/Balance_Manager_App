@@ -1,4 +1,25 @@
-# Balance Manager App
+# Balance Manager App 📱
+
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/61806906/198152657-cfb8c953-4f5a-4af8-86ce-58cae022fe9c.png" alt="screenshot 1" width="20%" height="20%"/>
+  <img src="https://user-images.githubusercontent.com/61806906/198153631-c2633cd7-17f5-4f11-b734-d9e3defb0339.png" alt="screenshot 1" width="20%" height="20%"/>
+</p>
+
+<h4 align="center">
+  The development of this app is on going and it still in early stages.
+</h4>
+
+<h6 align="center"> 
+  <a href= "https://docs.google.com/document/d/1uwf9_W-jRhgGxdPYPdML0cEH8OpjavBO2DPHnatFzCg/edit"> Specification Doc </a>
+</h6>
+  
+  
+<br><br><br><br><br><br>
+
+<h2 align="center">
+  Boring Stuff 😴
+</h2>
 
 ### ToDo list (Tito)
 
