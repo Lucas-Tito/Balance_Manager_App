@@ -3,6 +3,8 @@ package com.example.mobile_final_project;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,7 +17,9 @@ import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.utils.EditAmountTransaction;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 
@@ -23,6 +27,11 @@ public class Add_Transaction_Expense extends Fragment {
 
     private static final String expenseDAO_KEY = "expenseDAO_KEY";
     private ExpenseDAO expenseDAO;
+
+    private static DecimalFormat REAL_FORMATTER = new DecimalFormat("$ #,##0.00");
+
+    //Componentes do layout
+    private TextView expenseAmount;
 
     public Add_Transaction_Expense() {
         // Required empty public constructor
@@ -53,6 +62,21 @@ public class Add_Transaction_Expense extends Fragment {
         build_confirm_btn(v);
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        expenseAmount = getView().findViewById(R.id.amount);
+
+        expenseAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new EditAmountTransaction().show(getActivity().getSupportFragmentManager(), EditAmountTransaction.newInstance().getTag());
+            }
+        });
+
     }
 
     public void build_confirm_btn(View v){

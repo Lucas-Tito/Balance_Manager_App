@@ -57,7 +57,7 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         edtAmountValue = getView().findViewById(R.id.edtAmountValue);
-        btnSaveAmount = getView().findViewById(R.id.btnSaveAmount);
+        //btnSaveAmount = getView().findViewById(R.id.btnSaveAmount);
         System.out.println("ON VIEW CREATED");
 
 
@@ -69,7 +69,7 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
         //newTaskText.setText(task);
         if(task.length()>0)
         {
-            btnSaveAmount.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
+            //btnSaveAmount.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
         }
         edtAmountValue.addTextChangedListener(new TextWatcher() {
             @Override
@@ -84,20 +84,24 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
                 if(charSequence.toString().equals(""))
                 {
                     System.out.println("CHAT ON CHANGE");
-                    btnSaveAmount.setEnabled(false);
-                    btnSaveAmount.setTextColor(Color.RED);
+                    //btnSaveAmount.setEnabled(false);
+                    //btnSaveAmount.setTextColor(Color.RED);
                 }
                 else
                 {
-                    btnSaveAmount.setEnabled(true);
-                    btnSaveAmount.setTextColor(ContextCompat.getColor(getContext(), R.color.Snow));
+                    //btnSaveAmount.setEnabled(true);
+                    //btnSaveAmount.setTextColor(ContextCompat.getColor(getContext(), R.color.Snow));
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable)
             {
+                System.out.println("ENTROU NO ONCLICK DE SALVAR");
+                Double amount = Double.parseDouble(edtAmountValue.getText().toString());
+                Income.amount = amount;
 
+                dismiss();
             }
 
 
@@ -105,16 +109,12 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
 
         boolean finalIsUpdate = isUpdate;
         Bundle finalBundle = bundle;
-        btnSaveAmount.setOnClickListener(new View.OnClickListener() {
+        /*btnSaveAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("ENTROU NO ONCLICK DE SALVAR");
-                Double amount = Double.parseDouble(edtAmountValue.getText().toString());
-                Income.amount = amount;
 
-                dismiss();
             }
-        });
+        });*/
 
     }
 
