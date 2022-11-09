@@ -13,17 +13,6 @@
         android:inputType="numberDecimal"
         ></EditText>
 
-    <Button
-        android:id="@+id/btnSaveAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtAmountValue"
-        android:layout_alignParentEnd="true"
-        android:background="@color/white"
-        android:enabled="true"
-        android:text="Salvar"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="16sp"></Button>
+
 
 </RelativeLayout>
