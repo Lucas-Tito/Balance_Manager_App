@@ -1,15 +1,20 @@
 package com.example.mobile_final_project.utils;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,64 +62,23 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         edtAmountValue = getView().findViewById(R.id.edtAmountValue);
-        //btnSaveAmount = getView().findViewById(R.id.btnSaveAmount);
         System.out.println("ON VIEW CREATED");
 
 
-        boolean isUpdate = false;
-        Bundle bundle = new Bundle();
-        bundle = this.getArguments();
-        System.out.println("BUNDLE: "+bundle);
-        String task = edtAmountValue.getText().toString();
-        //newTaskText.setText(task);
-        if(task.length()>0)
-        {
-            //btnSaveAmount.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
-        }
-        edtAmountValue.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
+        edtAmountValue.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    //Log.i(TAG,"Here you can write the code");
+                    Double amount = Double.parseDouble(edtAmountValue.getText().toString());
+                    Income.amount = amount;
 
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.toString().equals(""))
-                {
-                    System.out.println("CHAT ON CHANGE");
-                    //btnSaveAmount.setEnabled(false);
-                    //btnSaveAmount.setTextColor(Color.RED);
+                    dismiss();
+                    return true;
                 }
-                else
-                {
-                    //btnSaveAmount.setEnabled(true);
-                    //btnSaveAmount.setTextColor(ContextCompat.getColor(getContext(), R.color.Snow));
-                }
+                return false;
             }
-
-            @Override
-            public void afterTextChanged(Editable editable)
-            {
-                System.out.println("ENTROU NO ONCLICK DE SALVAR");
-                Double amount = Double.parseDouble(edtAmountValue.getText().toString());
-                Income.amount = amount;
-
-                dismiss();
-            }
-
-
         });
 
-        boolean finalIsUpdate = isUpdate;
-        Bundle finalBundle = bundle;
-        /*btnSaveAmount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
 
     }
 
@@ -128,8 +92,6 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
         }
 
         System.out.println("ENTROU NO ONDISMISS");
-        System.out.println(activity);
-        System.out.println(activity instanceof DialogCloseListener);
         if(activity instanceof DialogCloseListener)
         {
             System.out.println("ENTROU IF DO DISMISS");

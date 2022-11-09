@@ -31,8 +31,6 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     private static final String incomeDAO_KEY = "incomeDAO_KEY";
     private IncomeDAO incomeDAO;
 
-    //private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
-
     DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 
 
@@ -71,6 +69,8 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
 
         return v;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
