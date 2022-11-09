@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Todo: CREATE ONLY A OBJECT ON ADD SCREENS AND ADD IT HERE ON RESULT
         if (requestCode == 101)
             if(resultCode == MainActivity.RESULT_OK)
                 expenseDAO = (ExpenseDAO) data.getSerializableExtra("newExpenseDao");
