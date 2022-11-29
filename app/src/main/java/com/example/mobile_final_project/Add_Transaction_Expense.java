@@ -16,6 +16,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.utils.EditAmountTransaction;
 
@@ -25,8 +26,9 @@ import java.util.Date;
 
 public class Add_Transaction_Expense extends Fragment {
 
-    private static final String expenseDAO_KEY = "expenseDAO_KEY";
-    private ExpenseDAO expenseDAO;
+    private static final String newExpenseID_KEY = "newExpenseID_KEY";
+    private int newExpenseID;
+
 
     private static DecimalFormat REAL_FORMATTER = new DecimalFormat("$ #,##0.00");
 
@@ -38,10 +40,10 @@ public class Add_Transaction_Expense extends Fragment {
     }
 
 
-    public static Add_Transaction_Expense newInstance(ExpenseDAO expenseDAO) {
+    public static Add_Transaction_Expense newInstance(int newExpenseID) {
         Add_Transaction_Expense fragment = new Add_Transaction_Expense();
         Bundle args = new Bundle();
-        args.putSerializable(expenseDAO_KEY, expenseDAO);
+        args.putInt(newExpenseID_KEY, newExpenseID);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +52,7 @@ public class Add_Transaction_Expense extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            expenseDAO = (ExpenseDAO) getArguments().getSerializable(expenseDAO_KEY);
+            newExpenseID = getArguments().getInt(newExpenseID_KEY);
         }
     }
 
@@ -97,11 +99,10 @@ public class Add_Transaction_Expense extends Fragment {
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
 
-                Expense newExpense = new Expense(expenseDAO.getSize(), description, new Date(), amount, isPaid);
-                expenseDAO.addExpense(newExpense);
+                Expense newExpense = new Expense(newExpenseID, description, new Date(), amount, isPaid);
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("newExpenseDao", expenseDAO);
+                returnIntent.putExtra("newExpense", newExpense);
                 getActivity().setResult(getActivity().RESULT_OK, returnIntent);
                 getActivity().finish();
             }

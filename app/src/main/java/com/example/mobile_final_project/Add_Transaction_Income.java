@@ -28,8 +28,8 @@ import java.util.Date;
 
 public class Add_Transaction_Income extends Fragment implements DialogCloseListener {
 
-    private static final String incomeDAO_KEY = "incomeDAO_KEY";
-    private IncomeDAO incomeDAO;
+    private static final String newIncomeID_KEY = "newIncomeID_KEY";
+    private int newIncomeID;
 
     //private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
@@ -45,10 +45,10 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
         // Required empty public constructor
     }
 
-    public static Add_Transaction_Income newInstance(IncomeDAO incomeDAO) {
+    public static Add_Transaction_Income newInstance(int newIncomeID) {
         Add_Transaction_Income fragment = new Add_Transaction_Income();
         Bundle args = new Bundle();
-        args.putSerializable(incomeDAO_KEY, incomeDAO);
+        args.putInt(newIncomeID_KEY, newIncomeID);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +57,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            incomeDAO = (IncomeDAO) getArguments().getSerializable(incomeDAO_KEY);
+            newIncomeID = getArguments().getInt(newIncomeID_KEY);
         }
     }
 
@@ -104,11 +104,10 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
 
-                Income newIncome = new Income(incomeDAO.getSize(), description, new Date(), amount, isPaid);
-                incomeDAO.addIncome(newIncome);
+                Income newIncome = new Income(newIncomeID, description, new Date(), amount, isPaid);
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("newIncomeDao", incomeDAO);
+                returnIntent.putExtra("newIncome", newIncome);
                 getActivity().setResult(getActivity().RESULT_OK, returnIntent);
                 getActivity().finish();
             }

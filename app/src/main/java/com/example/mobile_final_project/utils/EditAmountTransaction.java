@@ -127,6 +127,7 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
             incomeAmount.setText(REAL_FORMATTER.format(Income.amount));
         }
 
+
         System.out.println("ENTROU NO ONDISMISS");
         System.out.println(activity);
         System.out.println(activity instanceof DialogCloseListener);

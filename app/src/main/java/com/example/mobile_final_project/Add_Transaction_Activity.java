@@ -52,13 +52,13 @@ public class Add_Transaction_Activity extends AppCompatActivity {
         TextView toolbar_title = findViewById(R.id.toolbar_title);
 
         if(getIntent().getIntExtra("fragToStart", 0) == 1){
-            ExpenseDAO expenseDAO = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
-            fragmentToStart = Add_Transaction_Expense.newInstance(expenseDAO);
+            int newExpenseID = getIntent().getIntExtra("newExpenseID", -1);
+            fragmentToStart = Add_Transaction_Expense.newInstance(newExpenseID);
             toolbar_title.setText(R.string.toolbar_title_expense);
         }
         else if(getIntent().getIntExtra("fragToStart", 0) == 2){
-            IncomeDAO incomeDAO = (IncomeDAO) getIntent().getSerializableExtra("incomeDao");
-            fragmentToStart = Add_Transaction_Income.newInstance(incomeDAO);
+            int newIncomeID = getIntent().getIntExtra("newIncomeID", -1);
+            fragmentToStart = Add_Transaction_Income.newInstance(newIncomeID);
             toolbar_title.setText(R.string.toolbar_title_income);
         }
 

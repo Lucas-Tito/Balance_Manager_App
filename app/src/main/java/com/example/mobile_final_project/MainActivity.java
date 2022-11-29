@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         // Todo: CREATE ONLY A OBJECT ON ADD SCREENS AND ADD IT HERE ON RESULT
         if (requestCode == 101)
             if(resultCode == MainActivity.RESULT_OK)
-                expenseDAO = (ExpenseDAO) data.getSerializableExtra("newExpenseDao");
+                expenseDAO.addExpense((Expense) data.getSerializableExtra("newExpense"));
 
 
         if (requestCode == 102)
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 1);
-                intent.putExtra("expenseDao", expenseDAO);
+                intent.putExtra("newExpenseID", expenseDAO.getSize());
                 startActivityForResult(intent, 101);
             }
         });
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 2);
-                intent.putExtra("incomeDao", incomeDAO);
+                intent.putExtra("newIncomeID", incomeDAO.getSize());
                 startActivityForResult(intent, 102);
             }
         });
