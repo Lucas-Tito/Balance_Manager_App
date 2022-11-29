@@ -8,4 +8,9 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
+    <!--btn_style-->
+    <style name="login_btn_style">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
