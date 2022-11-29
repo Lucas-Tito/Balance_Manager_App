@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Todo: CREATE ONLY A OBJECT ON ADD SCREENS AND ADD IT HERE ON RESULT
         if (requestCode == 101)
             if(resultCode == MainActivity.RESULT_OK)
                 expenseDAO.addExpense((Expense) data.getSerializableExtra("newExpense"));
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 102)
             if(resultCode == MainActivity.RESULT_OK)
-                incomeDAO = (IncomeDAO) data.getSerializableExtra("newIncomeDao");
+                incomeDAO.addIncome((Income) data.getSerializableExtra(("newIncome")));
 
 
         //refreshes fragment to show changes on list
