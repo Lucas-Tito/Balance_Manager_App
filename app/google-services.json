@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "807138705232",
+    "project_id": "incomemanagement-f8bf2",
+    "storage_bucket": "incomemanagement-f8bf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807138705232:android:43966f90f1c19390843655",
+        "android_client_info": {
+          "package_name": "com.example.mobile_final_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807138705232-dsk80oukc4fccg51beu7gff0lnh6nlqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD26bZBMeq1wyGVaE8x0yYnA0GkQ-Tr5kQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807138705232-dsk80oukc4fccg51beu7gff0lnh6nlqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

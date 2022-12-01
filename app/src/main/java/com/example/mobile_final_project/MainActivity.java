@@ -19,6 +19,8 @@ import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Income;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Date;
 
@@ -37,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
         build_float_btns();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        if(user == null){
+            startActivity(new Intent(MainActivity.this, Login_Activity.class));
+        }
+    }
 
     //Override method to receive updated expenses from other activities
     @Override
