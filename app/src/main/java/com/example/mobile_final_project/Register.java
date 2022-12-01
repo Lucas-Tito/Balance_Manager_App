@@ -105,6 +105,7 @@ public class Register extends Fragment {
                 passwordInput = v.findViewById(R.id.passwordInput);
 
                 mAuth = FirebaseAuth.getInstance();
+                fStore = FirebaseFirestore.getInstance();
 
                 createUser(nameInput.getText().toString(), emailInput.getText().toString(),
                         passwordInput.getText().toString());
