@@ -15,13 +15,13 @@ import com.example.mobile_final_project.model.Transaction;
 
 import java.util.ArrayList;
 
-public class Adapter_RecyclerView extends RecyclerView.Adapter<Adapter_RecyclerView.MyViewHolder> {
+public class Transactions_Adapter_RecyclerView extends RecyclerView.Adapter<Transactions_Adapter_RecyclerView.MyViewHolder> {
 
-    ArrayList<Transaction> united_transactions = new ArrayList<>();
+    ArrayList<Transaction> united_transactions;
     Context context;
     private final Interface_RecyclerView recyclerViewInterface;
 
-    public Adapter_RecyclerView(Context ct, ArrayList<Transaction> united_transactions, Interface_RecyclerView recyclerViewInterface){
+    public Transactions_Adapter_RecyclerView(Context ct, ArrayList<Transaction> united_transactions, Interface_RecyclerView recyclerViewInterface){
         this.united_transactions = united_transactions;
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;

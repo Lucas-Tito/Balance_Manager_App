@@ -130,6 +130,7 @@
                     android:background="@color/white" />
 
                 <LinearLayout
+                    android:id="@+id/category_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -146,9 +147,9 @@
                         android:id="@+id/placeholder"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:background="@android:color/transparent"
                         android:ems="15"
-                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="Place Holder Category" />
 

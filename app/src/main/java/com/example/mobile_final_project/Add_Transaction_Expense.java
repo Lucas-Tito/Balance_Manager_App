@@ -1,20 +1,30 @@
 package com.example.mobile_final_project;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.mobile_final_project.Adapters.Categories_Adapter_RecyclerView;
+import com.example.mobile_final_project.Adapters.Interface_RecyclerView;
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 import com.example.mobile_final_project.model.Expense;
@@ -24,7 +34,7 @@ import java.text.DecimalFormat;
 import java.util.Date;
 
 
-public class Add_Transaction_Expense extends Fragment {
+public class Add_Transaction_Expense extends Fragment implements Interface_RecyclerView {
 
     private static final String newExpenseID_KEY = "newExpenseID_KEY";
     private int newExpenseID;
@@ -62,6 +72,7 @@ public class Add_Transaction_Expense extends Fragment {
         View v = inflater.inflate(R.layout.add_transaction_expense, container, false);
 
         build_confirm_btn(v);
+        build_choose_categories(v);
 
         return v;
     }
@@ -110,4 +121,39 @@ public class Add_Transaction_Expense extends Fragment {
 
     }
 
+
+    private void build_choose_categories(View v) {
+
+        LinearLayout categories_btn = v.findViewById(R.id.category_layout);
+        Interface_RecyclerView recyclerViewInterface = this;
+
+        categories_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.transaction_category_options);
+
+                RecyclerView category_options = dialog.findViewById(R.id.recyclerView);
+                Categories_Adapter_RecyclerView adapter = new Categories_Adapter_RecyclerView(getContext(), recyclerViewInterface);
+                category_options.setAdapter(adapter);
+                category_options.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                dialog.show();
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onItemClick(int position, String fragToStart) {
+
+    }
 }

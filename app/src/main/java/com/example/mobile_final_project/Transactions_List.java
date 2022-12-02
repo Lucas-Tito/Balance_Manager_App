@@ -3,9 +3,7 @@ package com.example.mobile_final_project;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -13,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mobile_final_project.Adapters.Adapter_RecyclerView;
+import com.example.mobile_final_project.Adapters.Transactions_Adapter_RecyclerView;
 import com.example.mobile_final_project.Adapters.Interface_RecyclerView;
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
-import com.example.mobile_final_project.model.Expense;
-import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.model.Transaction;
 
 import java.util.ArrayList;
@@ -93,7 +89,7 @@ public class Transactions_List extends Fragment implements Interface_RecyclerVie
         androidx.recyclerview.widget.RecyclerView recyclerView;
         recyclerView = v.findViewById(R.id.recyclerView);
 
-        Adapter_RecyclerView myAdapter = new Adapter_RecyclerView(getActivity(), united_transactions, this);
+        Transactions_Adapter_RecyclerView myAdapter = new Transactions_Adapter_RecyclerView(getActivity(), united_transactions, this);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
