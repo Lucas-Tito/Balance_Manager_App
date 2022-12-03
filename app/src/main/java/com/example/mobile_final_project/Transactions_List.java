@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.Adapters.Transactions_Adapter_RecyclerView;
-import com.example.mobile_final_project.Adapters.Interface_RecyclerView;
+import com.example.mobile_final_project.Adapters.IRecyclerView_Transactions;
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 import com.example.mobile_final_project.model.Transaction;
@@ -20,7 +20,7 @@ import com.example.mobile_final_project.model.Transaction;
 import java.util.ArrayList;
 
 
-public class Transactions_List extends Fragment implements Interface_RecyclerView {
+public class Transactions_List extends Fragment implements IRecyclerView_Transactions {
 
     private static final String expenseDao_KEY = "expenseDao_key";
     private static final String incomeDao_KEY = "incomeDao_key";

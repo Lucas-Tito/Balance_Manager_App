@@ -27,8 +27,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense(0, "teste_expense", new Date(10, 9, 2003), 20.03));
-    IncomeDAO incomeDAO = new IncomeDAO(new Income(0, "teste_income", new Date(10, 9, 2003), 10.03));
+    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense(0, "teste_expense", "Leisure", new Date(10, 9, 2003), 20.03));
+    IncomeDAO incomeDAO = new IncomeDAO(new Income(0, "teste_income", "Clothing", new Date(10, 9, 2003), 10.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

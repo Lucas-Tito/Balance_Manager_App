@@ -11,18 +11,20 @@ public class Transaction implements Serializable {
     private double value;
     private boolean isPaid;
 
-    Transaction(int id, String description, Date date, double value){
+    Transaction(int id, String description, String category, Date date, double value){
 
         this.description = description;
+        this.category = category;
         this.entryDate = date;
         this.value = value;
         this.isPaid = true;
 
     }
 
-    Transaction(int id, String description, Date date, double value, boolean isPaid){
+    Transaction(int id, String description, String category, Date date, double value, boolean isPaid){
 
         this.description = description;
+        this.category = category;
         this.entryDate = date;
         this.value = value;
         this.isPaid = isPaid;

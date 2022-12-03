@@ -24,17 +24,17 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.Adapters.Categories_Adapter_RecyclerView;
-import com.example.mobile_final_project.Adapters.Interface_RecyclerView;
-import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
-import com.example.mobile_final_project.dao_transaction.IncomeDAO;
+import com.example.mobile_final_project.Adapters.IRecyclerView_Categories;
+import com.example.mobile_final_project.Adapters.IRecyclerView_Transactions;
 import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.utils.CategoryChooser;
 import com.example.mobile_final_project.utils.EditAmountTransaction;
 
 import java.text.DecimalFormat;
 import java.util.Date;
 
 
-public class Add_Transaction_Expense extends Fragment implements Interface_RecyclerView {
+public class Add_Transaction_Expense extends Fragment {
 
     private static final String newExpenseID_KEY = "newExpenseID_KEY";
     private int newExpenseID;
@@ -71,11 +71,12 @@ public class Add_Transaction_Expense extends Fragment implements Interface_Recyc
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_transaction_expense, container, false);
 
-        build_confirm_btn(v);
         build_choose_categories(v);
+        build_confirm_btn(v);
 
         return v;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -92,12 +93,30 @@ public class Add_Transaction_Expense extends Fragment implements Interface_Recyc
 
     }
 
+
+
+    private void build_choose_categories(View v) {
+        LinearLayout categories_btn = v.findViewById(R.id.category_layout);
+
+        categories_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CategoryChooser categoryChooser = new CategoryChooser();
+                categoryChooser.show(getActivity().getSupportFragmentManager(), "TAG");
+            }
+        });
+    }
+
+
+
+
     public void build_confirm_btn(View v){
 
         ImageButton confirm_btn = v.findViewById(R.id.confirm_btn);
         TextView label_amount = v.findViewById(R.id.amount);
         Switch isPaid_switch = v.findViewById(R.id.isPaid_switch);
         EditText description_label = v.findViewById(R.id.description);
+        TextView category_label = v.findViewById(R.id.category);
 
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +128,9 @@ public class Add_Transaction_Expense extends Fragment implements Interface_Recyc
                 Double amount = Double.parseDouble(str_amount);
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
+                String category = category_label.getText().toString();
 
-                Expense newExpense = new Expense(newExpenseID, description, new Date(), amount, isPaid);
+                Expense newExpense = new Expense(newExpenseID, description, category, new Date(), amount, isPaid);
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("newExpense", newExpense);
@@ -121,39 +141,4 @@ public class Add_Transaction_Expense extends Fragment implements Interface_Recyc
 
     }
 
-
-    private void build_choose_categories(View v) {
-
-        LinearLayout categories_btn = v.findViewById(R.id.category_layout);
-        Interface_RecyclerView recyclerViewInterface = this;
-
-        categories_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                final Dialog dialog = new Dialog(getContext());
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.transaction_category_options);
-
-                RecyclerView category_options = dialog.findViewById(R.id.recyclerView);
-                Categories_Adapter_RecyclerView adapter = new Categories_Adapter_RecyclerView(getContext(), recyclerViewInterface);
-                category_options.setAdapter(adapter);
-                category_options.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                dialog.show();
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-            }
-        });
-
-
-    }
-
-    @Override
-    public void onItemClick(int position, String fragToStart) {
-
-    }
 }

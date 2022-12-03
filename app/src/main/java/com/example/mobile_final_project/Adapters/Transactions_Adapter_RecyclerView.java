@@ -19,9 +19,9 @@ public class Transactions_Adapter_RecyclerView extends RecyclerView.Adapter<Tran
 
     ArrayList<Transaction> united_transactions;
     Context context;
-    private final Interface_RecyclerView recyclerViewInterface;
+    private final IRecyclerView_Transactions recyclerViewInterface;
 
-    public Transactions_Adapter_RecyclerView(Context ct, ArrayList<Transaction> united_transactions, Interface_RecyclerView recyclerViewInterface){
+    public Transactions_Adapter_RecyclerView(Context ct, ArrayList<Transaction> united_transactions, IRecyclerView_Transactions recyclerViewInterface){
         this.united_transactions = united_transactions;
         context = ct;
         this.recyclerViewInterface = recyclerViewInterface;

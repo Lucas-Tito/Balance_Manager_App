@@ -34,7 +34,7 @@ tools:context=".activitys.ReceitaItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nova income"
-                android:textColor="@color/Black"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -127,7 +127,7 @@ tools:context=".activitys.ReceitaItem"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="300dp"
                 android:text="Salvar"
-                android:textColor="@color/White"
+                android:textColor="@color/white"
                 android:textSize="10dp"
 
                 />

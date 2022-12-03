@@ -144,14 +144,14 @@
 
 
                     <TextView
-                        android:id="@+id/placeholder"
+                        android:id="@+id/category"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:ems="15"
+                        android:ems="20"
                         android:gravity="center_vertical"
-                        android:text="Place Holder Category" />
+                        android:text="Clothing" />
 
                     <ImageView
                         android:id="@+id/next_ic"

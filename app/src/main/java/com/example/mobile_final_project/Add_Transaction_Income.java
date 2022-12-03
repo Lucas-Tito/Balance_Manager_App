@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 import com.example.mobile_final_project.model.Income;
+import com.example.mobile_final_project.utils.CategoryChooser;
 import com.example.mobile_final_project.utils.EditAmountTransaction;
 
 import java.text.DecimalFormat;
@@ -65,6 +67,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.add_transaction_income, container, false);
 
+        build_choose_categories(v);
         build_confirm_btn(v);
 
         return v;
@@ -87,9 +90,26 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
 
     }
 
+
+
+    private void build_choose_categories(View v) {
+        LinearLayout categories_btn = v.findViewById(R.id.category_layout);
+
+        categories_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CategoryChooser categoryChooser = new CategoryChooser();
+                categoryChooser.show(getActivity().getSupportFragmentManager(), "TAG");
+            }
+        });
+    }
+
+
+
     public void build_confirm_btn(View v){
 
         ImageButton confirm_btn = v.findViewById(R.id.confirm_btn);
+        TextView category_label = v.findViewById(R.id.category);
         Switch isPaid_switch = v.findViewById(R.id.isPaid_switch);
         EditText description_label = v.findViewById(R.id.description);
 
@@ -103,8 +123,9 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
                 Double amount = Double.parseDouble(str_amount);
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
+                String category = category_label.getText().toString();
 
-                Income newIncome = new Income(newIncomeID, description, new Date(), amount, isPaid);
+                Income newIncome = new Income(newIncomeID, description, category, new Date(), amount, isPaid);
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("newIncome", newIncome);

@@ -1,4 +1,4 @@
-package com.example.mobile_final_project.utils;
+package com.example.mobile_final_project.model;
 
 public class User {
 
