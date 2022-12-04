@@ -62,6 +62,7 @@ public class EditAmountTransaction extends BottomSheetDialogFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         edtAmountValue = getView().findViewById(R.id.edtAmountValue);
+        edtAmountValue.requestFocus();
         System.out.println("ON VIEW CREATED");
 
 

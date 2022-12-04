@@ -70,7 +70,7 @@ public class Edit_Transaction_Income extends Fragment {
 
     private void buildView(int expensePos){
 
-        amount.setText(getString(R.string.currency) + Double.toString(incomeDao.get(expensePos).getValue()));
+        amount.setText(getString(R.string.currency) + incomeDao.get(expensePos).getValue());
         isReceived_switch.setChecked(incomeDao.get(expensePos).getIsPaid());
         description.setText(incomeDao.get(expensePos).getDescription());
 
