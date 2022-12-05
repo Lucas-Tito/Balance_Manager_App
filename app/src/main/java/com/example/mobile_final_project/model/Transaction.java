@@ -6,25 +6,27 @@ import java.util.Date;
 public class Transaction implements Serializable {
 
     private int id;
-    private String description, category;
+    private String description, category, location;
     private Date entryDate;
     private double value;
     private boolean isPaid;
 
-    Transaction(int id, String description, String category, Date date, double value){
+    Transaction(int id, String description, String category, String location, Date date, double value){
 
         this.description = description;
         this.category = category;
+        this.location = location;
         this.entryDate = date;
         this.value = value;
         this.isPaid = true;
 
     }
 
-    Transaction(int id, String description, String category, Date date, double value, boolean isPaid){
+    Transaction(int id, String description, String category, String location, Date date, double value, boolean isPaid){
 
         this.description = description;
         this.category = category;
+        this.location = location;
         this.entryDate = date;
         this.value = value;
         this.isPaid = isPaid;
@@ -40,6 +42,14 @@ public class Transaction implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public int getId() {

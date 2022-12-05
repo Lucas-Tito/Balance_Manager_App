@@ -13,11 +13,13 @@ import android.widget.ImageButton;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
+import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.model.Income;
 
 public class Edit_Transaction_Activity extends AppCompatActivity {
 
-    private ExpenseDAO expenseDao;
-    private IncomeDAO incomeDao;
+    private Expense expenseToEdit;
+    private Income incomeToEdit;
     private int transaction_pos;
 
     @Override
@@ -32,8 +34,8 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
 
         //-------------------------------------------+
 
-        expenseDao = (ExpenseDAO) getIntent().getSerializableExtra("expenseDao");
-        incomeDao = (IncomeDAO) getIntent().getSerializableExtra("incomeDao");
+        expenseToEdit = (Expense) getIntent().getSerializableExtra("expenseToEdit");
+        incomeToEdit = (Income) getIntent().getSerializableExtra("incomeToEdit");
         transaction_pos = getIntent().getIntExtra("transaction_pos", 0);
 
         build_frame_layout();
@@ -79,17 +81,15 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
 
                     case R.id.trash:
                         if(getIntent().getStringExtra("frag_key").equals("editExpense")){
-                            expenseDao.removeExpense(transaction_pos);
                             Intent returnIntent = new Intent();
-                            returnIntent.putExtra("newExpenseDao", expenseDao);
-                            setResult(RESULT_OK, returnIntent);
+                            returnIntent.putExtra("expenseToRemove", transaction_pos);
+                            setResult(2, returnIntent);
                             finish();
                         }
                         else{
-                            incomeDao.removeIncome(transaction_pos);
                             Intent returnIntent = new Intent();
-                            returnIntent.putExtra("newIncomeDao", incomeDao);
-                            setResult(RESULT_OK, returnIntent);
+                            returnIntent.putExtra("incomeToRemove", transaction_pos);
+                            setResult(2, returnIntent);
                             finish();
                         }
 
@@ -105,10 +105,10 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
         Fragment fragmentToStart = null;
 
         if(getIntent().getStringExtra("frag_key").equals("editExpense"))
-            fragmentToStart = Edit_Transaction_Expense.newInstance(expenseDao, transaction_pos);
+            fragmentToStart = Edit_Transaction_Expense.newInstance(expenseToEdit, transaction_pos);
 
         else
-            fragmentToStart = Edit_Transaction_Income.newInstance(incomeDao, transaction_pos);
+            fragmentToStart = Edit_Transaction_Income.newInstance(incomeToEdit, transaction_pos);
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, fragmentToStart).commit();

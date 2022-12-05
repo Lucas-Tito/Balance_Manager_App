@@ -9,23 +9,27 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
+import com.example.mobile_final_project.model.Expense;
 
 
 public class Edit_Transaction_Expense extends Fragment {
 
-    private static final String expenseDao_KEY = "expenseDao_key";
+    private static final String expense_KEY = "expense_key";
     private static final String transaction_pos_KEY = "transaction_pos_key";
-    private ExpenseDAO expenseDao;
+    private Expense expenseToEdit;
     private int transaction_pos;
 
     TextView amount;
     Switch isPaid_switch;
-    AppCompatEditText description;
+    AppCompatEditText description_field;
+    TextView category_field;
+    EditText location_field;
 
 
     public Edit_Transaction_Expense() {
@@ -33,10 +37,10 @@ public class Edit_Transaction_Expense extends Fragment {
     }
 
 
-    public static Edit_Transaction_Expense newInstance(ExpenseDAO expenseDAO, int transaction_pos) {
+    public static Edit_Transaction_Expense newInstance(Expense expenseToEdit, int transaction_pos) {
         Edit_Transaction_Expense fragment = new Edit_Transaction_Expense();
         Bundle args = new Bundle();
-        args.putSerializable(expenseDao_KEY, expenseDAO);
+        args.putSerializable(expense_KEY, expenseToEdit);
         args.putSerializable(transaction_pos_KEY, transaction_pos);
         fragment.setArguments(args);
         return fragment;
@@ -47,7 +51,7 @@ public class Edit_Transaction_Expense extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             //initialize expenseDao object when Edit_Transaction_Expenses.NewInstance is called
-            expenseDao = (ExpenseDAO) getArguments().getSerializable(expenseDao_KEY);
+            expenseToEdit = (Expense) getArguments().getSerializable(expense_KEY);
         }
     }
 
@@ -58,7 +62,9 @@ public class Edit_Transaction_Expense extends Fragment {
 
         amount = v.findViewById(R.id.amount);
         isPaid_switch = v.findViewById(R.id.isPaid_switch);
-        description = v.findViewById(R.id.description);
+        description_field = v.findViewById(R.id.description);
+        category_field = v.findViewById(R.id.category);
+        location_field = v.findViewById(R.id.location);
 
         buildView(transaction_pos);
         build_confirm_btn(v, transaction_pos);
@@ -69,9 +75,11 @@ public class Edit_Transaction_Expense extends Fragment {
 
     private void buildView(int expensePos){
 
-        amount.setText(getString(R.string.currency) + Double.toString(expenseDao.get(expensePos).getValue()));
-        isPaid_switch.setChecked(expenseDao.get(expensePos).getIsPaid());
-        description.setText(expenseDao.get(expensePos).getDescription());
+        amount.setText(getString(R.string.currency) + expenseToEdit.getValue());
+        isPaid_switch.setChecked(expenseToEdit.getIsPaid());
+        description_field.setText(expenseToEdit.getDescription());
+        category_field.setText(expenseToEdit.getCategory());
+        location_field.setText(expenseToEdit.getLocation());
 
     }
 
@@ -86,12 +94,14 @@ public class Edit_Transaction_Expense extends Fragment {
                 //Removes currency symbol from string to prevent error parsing to double
                 String str_amount = amount.getText().toString().replace(getText(R.string.currency), "");
 
-                expenseDao.get(expensePos).setValue(Double.parseDouble(str_amount));
-                expenseDao.get(expensePos).setIsPaid(isPaid_switch.isChecked());
-                expenseDao.get(expensePos).setDescription(description.getText().toString());
+                expenseToEdit.setValue(Double.parseDouble(str_amount));
+                expenseToEdit.setIsPaid(isPaid_switch.isChecked());
+                expenseToEdit.setDescription(description_field.getText().toString());
+                expenseToEdit.setCategory(category_field.getText().toString());
+                expenseToEdit.setLocation(location_field.getText().toString());
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("newExpenseDao", expenseDao);
+                returnIntent.putExtra("updatedExpense", expenseToEdit);
                 getActivity().setResult(getActivity().RESULT_OK, returnIntent);
                 getActivity().finish();
             }

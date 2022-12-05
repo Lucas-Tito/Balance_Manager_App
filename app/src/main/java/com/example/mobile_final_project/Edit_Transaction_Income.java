@@ -9,23 +9,27 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
+import com.example.mobile_final_project.model.Income;
 
 
 public class Edit_Transaction_Income extends Fragment {
 
-    private static final String incomeDao_KEY = "expenseDao_key";
+    private static final String income_KEY = "expenseDao_key";
     private static final String transaction_pos_KEY = "transaction_pos_key";
-    private IncomeDAO incomeDao;
+    private Income incomeToEdit;
     private int transaction_pos;
 
     TextView amount;
     Switch isReceived_switch;
-    AppCompatEditText description;
+    AppCompatEditText description_field;
+    TextView category_field;
+    EditText location_field;
 
 
     public Edit_Transaction_Income() {
@@ -33,10 +37,10 @@ public class Edit_Transaction_Income extends Fragment {
     }
 
 
-    public static Edit_Transaction_Income newInstance(IncomeDAO incomeDAO, int transaction_pos) {
+    public static Edit_Transaction_Income newInstance(Income incomeToEdit, int transaction_pos) {
         Edit_Transaction_Income fragment = new Edit_Transaction_Income();
         Bundle args = new Bundle();
-        args.putSerializable(incomeDao_KEY, incomeDAO);
+        args.putSerializable(income_KEY, incomeToEdit);
         args.putSerializable(transaction_pos_KEY, transaction_pos);
         fragment.setArguments(args);
         return fragment;
@@ -46,7 +50,7 @@ public class Edit_Transaction_Income extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            incomeDao = (IncomeDAO) getArguments().getSerializable(incomeDao_KEY);
+            incomeToEdit = (Income) getArguments().getSerializable(income_KEY);
         }
     }
 
@@ -59,7 +63,9 @@ public class Edit_Transaction_Income extends Fragment {
 
         amount = v.findViewById(R.id.amount);
         isReceived_switch = v.findViewById(R.id.isReceived_switch);
-        description = v.findViewById(R.id.description);
+        description_field = v.findViewById(R.id.description);
+        category_field = v.findViewById(R.id.category);
+        location_field = v.findViewById(R.id.location);
 
         buildView(transaction_pos);
         build_confirm_btn(v, transaction_pos);
@@ -68,11 +74,13 @@ public class Edit_Transaction_Income extends Fragment {
 
     }
 
-    private void buildView(int expensePos){
+    private void buildView(int incomePos){
 
-        amount.setText(getString(R.string.currency) + incomeDao.get(expensePos).getValue());
-        isReceived_switch.setChecked(incomeDao.get(expensePos).getIsPaid());
-        description.setText(incomeDao.get(expensePos).getDescription());
+        amount.setText(getString(R.string.currency) + incomeToEdit.getValue());
+        isReceived_switch.setChecked(incomeToEdit.getIsPaid());
+        description_field.setText(incomeToEdit.getDescription());
+        category_field.setText(incomeToEdit.getCategory());
+        location_field.setText(incomeToEdit.getLocation());
 
     }
 
@@ -87,12 +95,14 @@ public class Edit_Transaction_Income extends Fragment {
                 //Removes currency symbol from string to prevent error parsing to double
                 String str_amount = amount.getText().toString().replace(getText(R.string.currency), "");
 
-                incomeDao.get(incomePos).setValue(Double.parseDouble(str_amount));
-                incomeDao.get(incomePos).setIsPaid(isReceived_switch.isChecked());
-                incomeDao.get(incomePos).setDescription(description.getText().toString());
+                incomeToEdit.setValue(Double.parseDouble(str_amount));
+                incomeToEdit.setIsPaid(isReceived_switch.isChecked());
+                incomeToEdit.setDescription(description_field.getText().toString());
+                incomeToEdit.setCategory(category_field.getText().toString());
+                incomeToEdit.setLocation(location_field.getText().toString());
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("newIncomeDao", incomeDao);
+                returnIntent.putExtra("updatedIncome", incomeToEdit);
                 getActivity().setResult(getActivity().RESULT_OK, returnIntent);
                 getActivity().finish();
             }

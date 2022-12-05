@@ -30,12 +30,12 @@ public class IncomeDAO implements Serializable {
 
     }
 
-    public void editIncome(int id, int amount, boolean isPaid, String description, String category){
+    public void updateIncome(Income updatedIncome){
 
-        incomes.get(id).setValue(amount);
-        incomes.get(id).setIsPaid(isPaid);
-        incomes.get(id).setDescription(description);
-        incomes.get(id).setCategory(category);
+        incomes.get(updatedIncome.getId()).setValue(updatedIncome.getValue());
+        incomes.get(updatedIncome.getId()).setIsPaid(updatedIncome.getIsPaid());
+        incomes.get(updatedIncome.getId()).setDescription(updatedIncome.getDescription());
+        incomes.get(updatedIncome.getId()).setCategory(updatedIncome.getCategory());
 
     }
 

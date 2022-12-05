@@ -15,6 +15,7 @@ import com.example.mobile_final_project.Adapters.Transactions_Adapter_RecyclerVi
 import com.example.mobile_final_project.Adapters.IRecyclerView_Transactions;
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
+import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Transaction;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
         Transactions_List fragment = new Transactions_List();
         Bundle args = new Bundle();
         //used to receive expenseDao object when called
+
         args.putSerializable(expenseDao_KEY, expenseDAO);
         args.putSerializable(incomeDao_KEY, incomeDAO);
         fragment.setArguments(args);
@@ -100,16 +102,17 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
     public void onItemClick(int position, String fragToStart) {
         Intent intent = new Intent(getActivity(), Edit_Transaction_Activity.class);
         intent.putExtra("transaction_pos", position);
-        intent.putExtra("expenseDao", this.expenseDAO);
-        intent.putExtra("incomeDao", this.incomeDAO);
+        intent.putExtra("frag_key", fragToStart);
+
+
 
         if(fragToStart.equals("editExpense")){
-            intent.putExtra("frag_key", fragToStart);
-            getActivity().startActivityForResult(intent, 101);
+            intent.putExtra("expenseToEdit", this.expenseDAO.get(position));
+            getActivity().startActivityForResult(intent, 103);
         }
         else{
-            intent.putExtra("frag_key", fragToStart);
-            getActivity().startActivityForResult(intent, 102);
+            intent.putExtra("incomeToEdit", this.incomeDAO.get(position));
+            getActivity().startActivityForResult(intent, 104);
         }
 
 

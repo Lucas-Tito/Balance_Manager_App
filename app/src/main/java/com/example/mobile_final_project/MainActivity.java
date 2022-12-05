@@ -27,8 +27,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense(0, "teste_expense", "Leisure", new Date(10, 9, 2003), 20.03));
-    IncomeDAO incomeDAO = new IncomeDAO(new Income(0, "teste_income", "Clothing", new Date(10, 9, 2003), 10.03));
+    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense(0, "teste_expense", "Leisure", "place-holder-location", new Date(10, 9, 2003), 20.03));
+    IncomeDAO incomeDAO = new IncomeDAO(new Income(0, "teste_income", "Clothing", "place-holder-location", new Date(10, 9, 2003), 10.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,24 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 102)
             if(resultCode == MainActivity.RESULT_OK)
                 incomeDAO.addIncome((Income) data.getSerializableExtra(("newIncome")));
+
+
+        if (requestCode == 103){
+            if(resultCode == MainActivity.RESULT_OK)
+                expenseDAO.updateExpense((Expense) data.getSerializableExtra(("updatedExpense")));
+
+            if(resultCode == 2)
+                expenseDAO.removeExpense((int) data.getSerializableExtra("expenseToRemove"));
+        }
+
+
+        if (requestCode == 104){
+            if(resultCode == MainActivity.RESULT_OK)
+                incomeDAO.updateIncome((Income) data.getSerializableExtra(("updatedIncome")));
+
+            if(resultCode == 2)
+                incomeDAO.removeIncome((int)(data.getSerializableExtra("incomeToRemove")));
+        }
 
 
         //refreshes fragment to show changes on list

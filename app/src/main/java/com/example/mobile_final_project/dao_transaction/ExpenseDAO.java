@@ -31,12 +31,12 @@ public class ExpenseDAO implements Serializable {
 
     }
 
-    public void editExpense(int id, int amount, boolean isPaid, String description, String category){
+    public void updateExpense(Expense updatedExpense){
 
-        expenses.get(id).setValue(amount);
-        expenses.get(id).setIsPaid(isPaid);
-        expenses.get(id).setDescription(description);
-        expenses.get(id).setCategory(category);
+        expenses.get(updatedExpense.getId()).setValue(updatedExpense.getValue());
+        expenses.get(updatedExpense.getId()).setIsPaid(updatedExpense.getIsPaid());
+        expenses.get(updatedExpense.getId()).setDescription(updatedExpense.getDescription());
+        expenses.get(updatedExpense.getId()).setCategory(updatedExpense.getCategory());
 
     }
 
