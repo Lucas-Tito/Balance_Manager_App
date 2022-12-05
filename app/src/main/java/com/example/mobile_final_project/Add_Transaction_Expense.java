@@ -1,5 +1,7 @@
 package com.example.mobile_final_project;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mobile_final_project.Adapters.Categories_Adapter_RecyclerView;
 import com.example.mobile_final_project.Adapters.IRecyclerView_Categories;
@@ -29,9 +32,18 @@ import com.example.mobile_final_project.Adapters.IRecyclerView_Transactions;
 import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.utils.CategoryChooser;
 import com.example.mobile_final_project.utils.EditAmountTransaction;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 public class Add_Transaction_Expense extends Fragment {
@@ -72,6 +84,7 @@ public class Add_Transaction_Expense extends Fragment {
         View v = inflater.inflate(R.layout.add_transaction_expense, container, false);
 
         build_choose_categories(v);
+        build_choose_location(v);
         build_confirm_btn(v);
 
         return v;
@@ -107,10 +120,37 @@ public class Add_Transaction_Expense extends Fragment {
         });
     }
 
+    EditText location_field;
+    private void build_choose_location(View v) {
+        Places.initialize(getContext(), "AIzaSyBFLwrY0zRtVMU01jW4nvoDKTKZWVaO-DU");
+        location_field = v.findViewById(R.id.location);
+        location_field.setFocusable(false);
+        location_field.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG,
+                        Place.Field.NAME);
+                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fieldList).build(getActivity());
+                startActivityForResult(intent, 10);
+            }
+        });
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10 && resultCode == RESULT_OK){
+            Place place = Autocomplete.getPlaceFromIntent(data);
+            location_field.setText(place.getAddress());
+            /*you can get locality name using place.getName()*/
+        }
+        else if(resultCode == AutocompleteActivity.RESULT_ERROR){
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Toast.makeText(getContext(), status.getStatusMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 
-
-    public void build_confirm_btn(View v){
+    private void build_confirm_btn(View v){
 
         ImageButton confirm_btn = v.findViewById(R.id.confirm_btn);
         TextView label_amount = v.findViewById(R.id.amount);
