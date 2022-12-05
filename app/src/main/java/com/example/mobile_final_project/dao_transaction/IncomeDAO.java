@@ -36,6 +36,7 @@ public class IncomeDAO implements Serializable {
         incomes.get(updatedIncome.getId()).setIsPaid(updatedIncome.getIsPaid());
         incomes.get(updatedIncome.getId()).setDescription(updatedIncome.getDescription());
         incomes.get(updatedIncome.getId()).setCategory(updatedIncome.getCategory());
+        incomes.get(updatedIncome.getId()).setLocation(updatedIncome.getLocation());
 
     }
 

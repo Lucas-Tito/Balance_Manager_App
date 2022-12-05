@@ -37,6 +37,7 @@ public class ExpenseDAO implements Serializable {
         expenses.get(updatedExpense.getId()).setIsPaid(updatedExpense.getIsPaid());
         expenses.get(updatedExpense.getId()).setDescription(updatedExpense.getDescription());
         expenses.get(updatedExpense.getId()).setCategory(updatedExpense.getCategory());
+        expenses.get(updatedExpense.getId()).setLocation(updatedExpense.getLocation());
 
     }
 
