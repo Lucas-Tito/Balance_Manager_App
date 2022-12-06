@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.mobile_final_project.Adapters.Transactions_Adapter_RecyclerView;
@@ -62,11 +65,11 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
 
 
         build_labels(v);
+        build_transactions_dropdown(v);
         build_recyclerView(v);
 
         return v;
     }
-
 
     public void build_labels(View v){
 
@@ -82,20 +85,83 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
 
     }
 
-    private ArrayList<Transaction> united_transactions = new ArrayList<>();
+
+    private void build_transactions_dropdown(View v) {
+
+        LinearLayout transactions_dropdown = v.findViewById(R.id.transactions_dropdown);
+
+        transactions_dropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(getActivity(), transactions_dropdown);
+                popupMenu.getMenuInflater().inflate(R.menu.transactions_dropdown, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        switch (menuItem.getItemId()){
+
+                            case R.id.transactions:
+                                recyclerView_filter_Transactions();
+                                break;
+
+                            case R.id.expenses:
+                                recyclerView_filter_Expenses();
+                                break;
+
+                            case R.id.incomes:
+                                recyclerView_filter_Incomes();
+                                break;
+
+                        }
+
+                        return true;
+                    }
+                });
+
+                popupMenu.show();
+            }
+        });
+
+    }
+
+
+    androidx.recyclerview.widget.RecyclerView recyclerView;
     private void build_recyclerView(View v) {
 
-        united_transactions.addAll(expenseDAO.getAll());
-        united_transactions.addAll(incomeDAO.getAll());
-
-        androidx.recyclerview.widget.RecyclerView recyclerView;
         recyclerView = v.findViewById(R.id.recyclerView);
-
-        Transactions_Adapter_RecyclerView myAdapter = new Transactions_Adapter_RecyclerView(getActivity(), united_transactions, this);
-        recyclerView.setAdapter(myAdapter);
+        recyclerView_filter_Transactions();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
+
+
+    private void recyclerView_filter_Expenses(){
+        ArrayList<Transaction> united_transactions = new ArrayList<>();
+        united_transactions.addAll(expenseDAO.getAll());
+        Transactions_Adapter_RecyclerView myAdapter = new Transactions_Adapter_RecyclerView(getActivity(), united_transactions, this);
+        recyclerView.setAdapter(myAdapter);
+    }
+
+
+    private void recyclerView_filter_Incomes(){
+        ArrayList<Transaction> united_transactions = new ArrayList<>();
+        united_transactions.addAll(incomeDAO.getAll());
+        Transactions_Adapter_RecyclerView myAdapter = new Transactions_Adapter_RecyclerView(getActivity(), united_transactions, this);
+        recyclerView.setAdapter(myAdapter);
+    }
+
+
+    private void recyclerView_filter_Transactions(){
+        ArrayList<Transaction> united_transactions = new ArrayList<>();
+        united_transactions.addAll(expenseDAO.getAll());
+        united_transactions.addAll(incomeDAO.getAll());
+        Transactions_Adapter_RecyclerView myAdapter = new Transactions_Adapter_RecyclerView(getActivity(), united_transactions, this);
+        recyclerView.setAdapter(myAdapter);
+    }
+
+
 
     //click listener for recycleView items
     @Override

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Transactions"
+        android:icon="@drawable/add_transaction_btn_shape"
+        android:iconTint="@color/dark_blue"
+        android:id="@+id/transactions" />
+
+
+    <item
+        android:title="Expenses"
+        android:icon="@drawable/add_transaction_btn_shape"
+        android:id="@+id/expenses" />
+
+    <item
+        android:title="Incomes"
+        android:icon="@drawable/add_transaction_btn_shape"
+        android:iconTint="@color/light_green"
+        android:id="@+id/incomes"/>
+
+</menu>
