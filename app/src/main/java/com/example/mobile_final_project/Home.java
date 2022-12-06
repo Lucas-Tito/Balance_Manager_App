@@ -1,5 +1,8 @@
 package com.example.mobile_final_project;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Home extends Fragment {
@@ -45,8 +50,12 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_nav_home, container, false);
 
+        build_hide_btn(v);
+
         return v;
     }
+
+
 
 
     @Override
@@ -54,6 +63,40 @@ public class Home extends Fragment {
         super.onResume();
 
         build_balance_dashboard(getView());
+    }
+
+    boolean visible = true;
+    private void build_hide_btn(View v) {
+
+        ImageView hide_btn = v.findViewById(R.id.hide_btn);
+        TextView total_amount = v.findViewById(R.id.total_amount);
+        TextView incomes_amount = v.findViewById(R.id.incomes_amount);
+        TextView expenses_amount = v.findViewById(R.id.expenses_amount);
+
+
+        hide_btn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View view) {
+
+                if(visible){
+                    total_amount.setForeground(new ColorDrawable(getResources().getColor(R.color.black)));
+                    incomes_amount.setForeground(new ColorDrawable(getResources().getColor(R.color.black)));
+                    expenses_amount.setForeground(new ColorDrawable(getResources().getColor(R.color.black)));
+                    hide_btn.setImageResource(R.drawable.home_invisibility_ic);
+                    visible = false;
+                }
+                else{
+                    total_amount.setForeground(null);
+                    incomes_amount.setForeground(null);
+                    expenses_amount.setForeground(null);
+                    hide_btn.setImageResource(R.drawable.home_visibility_ic);
+                    visible = true;
+                }
+
+            }
+        });
+
     }
 
 
