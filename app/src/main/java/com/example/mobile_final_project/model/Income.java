@@ -5,6 +5,8 @@ import java.util.Date;
 public class Income extends Transaction{
 
     public static Double amount;
+
+    public Income(){}
     public Income(int id, String description, String category, String location, Date date, double value) {
         super(id, description, category, location, date, value);
         amount = value;

@@ -22,7 +22,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+
 import java.util.Date;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -85,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //refreshes fragment to show changes on list
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, Transactions_List.newInstance(expenseDAO, incomeDAO)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new Transactions_List()).commit();//.newInstance(expenseDAO, incomeDAO)).commit();
     }
 
     private boolean fab_main_clicked = false;
@@ -188,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.transactions:
-                        fragment = Transactions_List.newInstance(expenseDAO, incomeDAO);
+                        fragment = new Transactions_List();//.newInstance(expenseDAO, incomeDAO);
                         break;
 
                     case R.id.more:

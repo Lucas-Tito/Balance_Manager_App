@@ -11,6 +11,8 @@ public class Transaction implements Serializable {
     private double value;
     private boolean isPaid;
 
+    public Transaction(){}
+
     Transaction(int id, String description, String category, String location, Date date, double value){
 
         this.description = description;
@@ -96,10 +98,14 @@ public class Transaction implements Serializable {
 
     @Override
     public String toString() {
-        return "Receita{" +
-                "valor=" + value +
-                ", dataEntrada=" + entryDate +
-                ", descricao='" + description + '\'' +
+        return "Transaction{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", location='" + location + '\'' +
+                ", entryDate=" + entryDate +
+                ", value=" + value +
+                ", isPaid=" + isPaid +
                 '}';
     }
 }
