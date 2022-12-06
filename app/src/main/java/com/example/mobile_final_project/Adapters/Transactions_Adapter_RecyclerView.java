@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobile_final_project.R;
 import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Transaction;
+import com.example.mobile_final_project.utils.Resource;
 import com.example.mobile_final_project.utils.categoryResources;
 
 import java.util.ArrayList;
@@ -38,24 +39,25 @@ public class Transactions_Adapter_RecyclerView extends RecyclerView.Adapter<Tran
         return new MyViewHolder(view);
     }
 
-
+    categoryResources categoryResources = new categoryResources();
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        categoryResources categoryResources = new categoryResources();
+        Transaction transaction = united_transactions.get(position);
+        Resource resource = categoryResources.getValues(transaction.getCategory());
 
-        holder.date_label.setText(united_transactions.get(position).getDate().toString());
-        holder.description_label.setText(united_transactions.get(position).getDescription());
-        holder.category_label.setText(united_transactions.get(position).getCategory());
-        holder.amount_label.setText(context.getString(R.string.currency) + String.valueOf(united_transactions.get(position).getValue()));
-        holder.category_ic.setImageResource(categoryResources.getValues(united_transactions.get(position).getCategory()).getImg());
-        holder.category_ic.setBackgroundTintList(context.getResources().getColorStateList(categoryResources.getValues(united_transactions.get(position).getCategory()).getColor()));
+        holder.date_label.setText(transaction.getDate().toString());
+        holder.description_label.setText(transaction.getDescription());
+        holder.category_label.setText(transaction.getCategory());
+        holder.amount_label.setText(context.getString(R.string.currency) + transaction.getValue());
+        holder.category_ic.setImageResource(resource.getImg());
+        holder.category_ic.setBackgroundTintList(context.getResources().getColorStateList(resource.getColor()));
 
 
-        if(!united_transactions.get(position).getIsPaid())
+        if(!transaction.getIsPaid())
             holder.isReceived_label.setVisibility(View.INVISIBLE);
 
-        if(united_transactions.get(position) instanceof Expense)
+        if(transaction instanceof Expense)
             holder.amount_label.setTextColor(context.getResources().getColor(R.color.light_red));
 
         else
