@@ -23,6 +23,7 @@
 
 ### ToDo list (Tito)
 
++ implement Singleton Design Pattern for DAO's.
 + recycleView need to implement a list view in recycleViewItem (for only one date by day is showed).
 + janky abstract class (Transactions).
 
