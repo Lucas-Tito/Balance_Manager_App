@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.mobile_final_project.factory.ITransactionFactory;
 import com.example.mobile_final_project.factory.TransactionFactory;
+import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,6 +38,43 @@ public class IncomeDAO implements Serializable {
     public IncomeDAO(Income income){
 
         addIncome(income);
+
+    }
+
+
+    public void getFromDB(){
+
+        //buscar expenses no banco
+        db.collection("transaction")
+                .whereEqualTo("type","expense")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+                                Gson gson = new GsonBuilder().create();
+
+                                String transactionJson = gson.toJson(document.getData());
+                                TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
+                                Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
+
+                                if(transactionFactory.transactionDBToDao(tdbModel) instanceof Expense)
+                                {
+                                    Income income = (Income) transactionFactory.transactionDBToDao(tdbModel);
+                                    incomes.add(income);
+                                    Log.d(TAG, "for expenses getall |> "+ income);
+
+                                    Log.d(TAG, "Mensagem expense getall from json: "+ income.toString());
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        //Log.d(TAG, " out expenses getall |> "+ expenses);
 
     }
 

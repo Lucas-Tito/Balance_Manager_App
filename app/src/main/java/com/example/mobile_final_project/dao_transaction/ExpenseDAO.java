@@ -60,7 +60,7 @@ public class ExpenseDAO implements Serializable {
                                 TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
                                 Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
 
-                                if(tdbModel.description.equals("cu"))
+                                if(transactionFactory.transactionDBToDao(tdbModel) instanceof Expense)
                                 {
                                     Expense expense = (Expense) transactionFactory.transactionDBToDao(tdbModel);
                                     expenses.add(expense);
@@ -68,7 +68,6 @@ public class ExpenseDAO implements Serializable {
 
                                     Log.d(TAG, "Mensagem expense getall from json: "+ expense.toString());
                                 }
-
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());

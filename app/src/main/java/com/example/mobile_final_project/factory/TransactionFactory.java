@@ -48,10 +48,10 @@ public class TransactionFactory implements ITransactionFactory
 
     public Transaction transactionDBToDao(TransactionDBViewModel transaction)
     {
-        SimpleDateFormat formato = new SimpleDateFormat("EEE,dd MMM yyyy HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("EEE,dd MMM yyyy HH:mm:ss");
         Date date = new Date();
         try {
-            date = formato.parse(transaction.entryDate);
+            date = format.parse(transaction.entryDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
