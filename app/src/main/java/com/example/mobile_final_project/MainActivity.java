@@ -44,9 +44,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        expenseDAO.getFromDB();
 
-        build_bottom_nav();
+
+        expenseDAO.getFromDB(new ExpenseDAO.FireStoreCallback() {
+            @Override
+            public void onCallback() {
+                build_bottom_nav();
+            }
+        });
+
+
         build_float_btns();
     }
 
@@ -124,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!fab_main_clicked){
-                    Log.d(TAG, "Mensagem de leitura local | "+ expenseDAO.getAll().get(0));
+                    //Log.d(TAG, "Mensagem de leitura local | "+ expenseDAO.getAll().get(0));
                     fab_main.startAnimation(rotateOpen);
 
                     fab_expense.setVisibility(View.VISIBLE);

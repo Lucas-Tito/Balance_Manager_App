@@ -42,7 +42,10 @@ public class ExpenseDAO implements Serializable {
     }
 
 
-    public void getFromDB(){
+    public interface FireStoreCallback{
+        void onCallback();
+    }
+    public void getFromDB(FireStoreCallback fireStoreCallback){
 
         //buscar expenses no banco
         db.collection("transaction")
@@ -53,20 +56,22 @@ public class ExpenseDAO implements Serializable {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+                                //Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
                                 Gson gson = new GsonBuilder().create();
 
                                 String transactionJson = gson.toJson(document.getData());
                                 TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
-                                Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
+                                //Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
 
                                 if(transactionFactory.transactionDBToDao(tdbModel) instanceof Expense)
                                 {
                                     Expense expense = (Expense) transactionFactory.transactionDBToDao(tdbModel);
                                     expenses.add(expense);
-                                    Log.d(TAG, "for expenses getall |> "+ expense);
+                                    total_amount += expense.getValue();
+                                    //Log.d(TAG, "for expenses getall |> "+ expense);
 
-                                    Log.d(TAG, "Mensagem expense getall from json: "+ expense.toString());
+                                    //Log.d(TAG, "Mensagem expense getall from json: "+ expense.toString());
+                                    fireStoreCallback.onCallback();
                                 }
                             }
                         } else {
