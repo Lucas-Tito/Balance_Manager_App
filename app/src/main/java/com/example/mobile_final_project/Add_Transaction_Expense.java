@@ -84,6 +84,7 @@ public class Add_Transaction_Expense extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_transaction_expense, container, false);
 
+
         build_choose_categories(v);
         build_choose_location(v);
         build_confirm_btn(v);

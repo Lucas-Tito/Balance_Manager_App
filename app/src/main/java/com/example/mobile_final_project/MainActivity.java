@@ -44,14 +44,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        incomeDAO.getFromDB();
         expenseDAO.getFromDB(new ExpenseDAO.FireStoreCallback() {
             @Override
             public void onCallback() {
                 build_bottom_nav();
             }
         });
+
+
 
 
         build_float_btns();
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 101)
             if(resultCode == MainActivity.RESULT_OK)
-                expenseDAO.addExpense((Expense) data.getSerializableExtra("newExpense"));
+                //expenseDAO.addExpense((Expense) data.getSerializableExtra("newExpense"));
 
 
         if (requestCode == 102)

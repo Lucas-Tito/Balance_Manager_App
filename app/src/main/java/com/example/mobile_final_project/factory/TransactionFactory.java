@@ -2,6 +2,7 @@ package com.example.mobile_final_project.factory;
 
 import static android.content.ContentValues.TAG;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import android.util.Log;

@@ -46,7 +46,7 @@ public class IncomeDAO implements Serializable {
 
         //buscar expenses no banco
         db.collection("transaction")
-                .whereEqualTo("type","expense")
+                .whereEqualTo("type","income")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -60,10 +60,11 @@ public class IncomeDAO implements Serializable {
                                 TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
                                 Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
 
-                                if(transactionFactory.transactionDBToDao(tdbModel) instanceof Expense)
+                                if(transactionFactory.transactionDBToDao(tdbModel) instanceof Income)
                                 {
                                     Income income = (Income) transactionFactory.transactionDBToDao(tdbModel);
                                     incomes.add(income);
+                                    total_amount += income.getValue();
                                     Log.d(TAG, "for expenses getall |> "+ income);
 
                                     Log.d(TAG, "Mensagem expense getall from json: "+ income.toString());

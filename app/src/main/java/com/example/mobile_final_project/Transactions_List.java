@@ -30,7 +30,6 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
     private static final String incomeDao_KEY = "incomeDao_key";
     private ExpenseDAO expenseDAO;
     private IncomeDAO incomeDAO;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Transactions_List() {
         // Required empty public constructor
