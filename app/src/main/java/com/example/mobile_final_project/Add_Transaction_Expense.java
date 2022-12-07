@@ -42,6 +42,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -171,7 +172,7 @@ public class Add_Transaction_Expense extends Fragment {
                 String category = category_label.getText().toString();
                 String location = location_field.getText().toString();
 
-                Expense newExpense = new Expense(newExpenseID, description, category, location, new Date(), amount, isPaid);
+                Expense newExpense = new Expense(newExpenseID, description, category, location, new Date(2016, 9, 2), amount, isPaid);
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("newExpense", newExpense);

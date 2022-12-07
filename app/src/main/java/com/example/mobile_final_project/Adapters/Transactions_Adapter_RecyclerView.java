@@ -44,6 +44,7 @@ public class Transactions_Adapter_RecyclerView extends RecyclerView.Adapter<Tran
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Transaction transaction = united_transactions.get(position);
+        System.out.println(position);
         Resource resource = categoryResources.getValues(transaction.getCategory());
 
         holder.date_label.setText(transaction.getDate().toString());

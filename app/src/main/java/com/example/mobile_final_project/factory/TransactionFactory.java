@@ -1,14 +1,17 @@
-package com.example.mobile_final_project.factoty;
+package com.example.mobile_final_project.factory;
 
 import static android.content.ContentValues.TAG;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import android.util.Log;
 
-import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Income;
+import com.example.mobile_final_project.model.Transaction;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +22,8 @@ public class TransactionFactory implements ITransactionFactory
         Map<String, Object> transactionDB = new HashMap<>();
         if(transaction instanceof Expense)
         {
-            transactionDB.put("categoty", ((Expense)transaction).getCategory().toString());
+            transactionDB.put("category", ((Expense)transaction).getCategory().toString());
+            transactionDB.put("entryDate", ((Expense)transaction).getDate().toString());
             transactionDB.put("description", ((Expense)transaction).getDescription().toString());
             transactionDB.put("id", ((Expense)transaction).getId());
             transactionDB.put("isPaid", ((Expense)transaction).getIsPaid());
@@ -29,7 +33,8 @@ public class TransactionFactory implements ITransactionFactory
         }
         else if(transaction instanceof Income){
             Log.d(TAG, "Entrou no factory do income: "+ transaction);
-            transactionDB.put("categoty", ((Income)transaction).getCategory().toString());
+            transactionDB.put("category", ((Income)transaction).getCategory().toString());
+            transactionDB.put("entryDate", ((Income)transaction).getDate().toString());
             transactionDB.put("description", ((Income)transaction).getDescription().toString());
             transactionDB.put("id", ((Income)transaction).getId());
             transactionDB.put("isPaid", ((Income)transaction).getIsPaid());
@@ -39,6 +44,26 @@ public class TransactionFactory implements ITransactionFactory
         }
 
         return transactionDB;
+    }
+
+    public Transaction transactionDBToDao(TransactionDBViewModel transaction)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("EEE,dd MMM yyyy HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = formato.parse(transaction.entryDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(transaction.type.equals("expense"))
+        {
+            Transaction expense = new Expense(transaction.id, transaction.description, transaction.category, transaction.location, date,transaction.value, transaction.isPaid );
+            return  expense;
+        }
+        else{
+            Transaction income = new Income(transaction.id, transaction.description, transaction.category, transaction.location, date,transaction.value, transaction.isPaid );
+            return  income;
+        }
     }
 
 }

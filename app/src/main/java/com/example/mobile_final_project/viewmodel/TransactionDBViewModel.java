@@ -5,7 +5,7 @@ import java.util.Date;
 public class TransactionDBViewModel {
     public int id;
     public String description, category, location,type;
-    public Date entryDate;
+    public String entryDate;
     public double value;
     public boolean isPaid;
 

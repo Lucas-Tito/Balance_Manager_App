@@ -1,15 +1,11 @@
 package com.example.mobile_final_project;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,22 +18,10 @@ import com.example.mobile_final_project.Adapters.Transactions_Adapter_RecyclerVi
 import com.example.mobile_final_project.Adapters.IRecyclerView_Transactions;
 import com.example.mobile_final_project.dao_transaction.ExpenseDAO;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
-import com.example.mobile_final_project.factoty.ITransactionFactory;
-import com.example.mobile_final_project.factoty.TransactionFactory;
-import com.example.mobile_final_project.model.Expense;
-import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.model.Transaction;
-import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 
 public class Transactions_List extends Fragment implements IRecyclerView_Transactions {
@@ -54,24 +38,24 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
 
 
 
-//    public static Transactions_List newInstance(ExpenseDAO expenseDAO, IncomeDAO incomeDAO) {
-//        Transactions_List fragment = new Transactions_List();
-//        Bundle args = new Bundle();
-//        //used to receive expenseDao object when called
-//
-//        args.putSerializable(expenseDao_KEY, expenseDAO);
-//        args.putSerializable(incomeDao_KEY, incomeDAO);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
+    public static Transactions_List newInstance(ExpenseDAO expenseDAO, IncomeDAO incomeDAO) {
+        Transactions_List fragment = new Transactions_List();
+        Bundle args = new Bundle();
+        //used to receive expenseDao object when called
+
+        args.putSerializable(expenseDao_KEY, expenseDAO);
+        args.putSerializable(incomeDao_KEY, incomeDAO);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             //initialize expenseDao object when Transactions.NewInstance is called
-            //expenseDAO = (ExpenseDAO) getArguments().getSerializable(expenseDao_KEY);
-            //incomeDAO = (IncomeDAO) getArguments().getSerializable(incomeDao_KEY);
+            expenseDAO = (ExpenseDAO) getArguments().getSerializable(expenseDao_KEY);
+            incomeDAO = (IncomeDAO) getArguments().getSerializable(incomeDao_KEY);
         }
 
     }
@@ -81,8 +65,6 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_nav_transactions, container, false);
 
-        expenseDAO = new ExpenseDAO();
-        incomeDAO = new IncomeDAO();
         build_labels(v);
         build_transactions_dropdown(v);
         build_recyclerView(v);
@@ -95,11 +77,8 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
     public void build_labels(View v){
 
         //Removes currency symbol from string to prevent error parsing to double
-
-       // Log.d(TAG, "incomeDAO.getTotal_amount() |> "+ incomeDAO.getTotal_amount());
-        Log.d(TAG, "incomeDAO |> "+ incomeDAO);
-        String str_incomes_amount = incomeDAO == null ? "0" : incomeDAO.getTotal_amount().toString();
-        String str_expenses_amount = expenseDAO == null ? "0" : expenseDAO.getTotal_amount().toString();
+        String str_incomes_amount = incomeDAO.getTotal_amount().toString();
+        String str_expenses_amount = expenseDAO.getTotal_amount().toString();
 
         Double total_amount_value = Double.valueOf(Math.round(Double.parseDouble(str_incomes_amount.replace(getText(R.string.currency), ""))
                 - Double.parseDouble(str_expenses_amount.replace(getText(R.string.currency), ""))));

@@ -6,9 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.mobile_final_project.factoty.ITransactionFactory;
-import com.example.mobile_final_project.factoty.TransactionFactory;
-import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.factory.ITransactionFactory;
+import com.example.mobile_final_project.factory.TransactionFactory;
 import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -91,29 +90,29 @@ public class IncomeDAO implements Serializable {
     public ArrayList<Income> getAll(){
 
         //buscar incomes no banco
-        db.collection("transaction")
-                .whereEqualTo("type","income")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
-                                Gson gson = new GsonBuilder().create();
-                                String transactionJson = gson.toJson(document.getData());
-                                TransactionDBViewModel transactionDBViewModel =gson.fromJson(transactionJson, TransactionDBViewModel.class);
-                                Income income = gson.fromJson(transactionJson, Income.class);
-                                incomes.add(income);
-
-                                Log.d(TAG, "Mensagem transviewModel |> "+ transactionDBViewModel.toString());
-                                Log.d(TAG, "Mensagem income from json: "+ income.toString());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
+//        db.collection("transaction")
+//                .whereEqualTo("type","income")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+//                                Gson gson = new GsonBuilder().create();
+//                                String transactionJson = gson.toJson(document.getData());
+//                                TransactionDBViewModel transactionDBViewModel =gson.fromJson(transactionJson, TransactionDBViewModel.class);
+//                                Income income = gson.fromJson(transactionJson, Income.class);
+//                                incomes.add(income);
+//
+//                                Log.d(TAG, "Mensagem transviewModel |> "+ transactionDBViewModel.toString());
+//                                Log.d(TAG, "Mensagem income from json: "+ income.toString());
+//                            }
+//                        } else {
+//                            Log.w(TAG, "Error getting documents.", task.getException());
+//                        }
+//                    }
+//                });
 
         return incomes;
     }

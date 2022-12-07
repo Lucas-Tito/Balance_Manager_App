@@ -6,9 +6,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.mobile_final_project.factoty.ITransactionFactory;
-import com.example.mobile_final_project.factoty.TransactionFactory;
+import com.example.mobile_final_project.factory.ITransactionFactory;
+import com.example.mobile_final_project.factory.TransactionFactory;
 import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.model.Transaction;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,12 +22,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.checkerframework.checker.units.qual.A;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 //class implements Serializable so it can be passed from Activities to Fragments
 public class ExpenseDAO implements Serializable {
@@ -41,6 +38,44 @@ public class ExpenseDAO implements Serializable {
     public ExpenseDAO(Expense expense){
 
         addExpense(expense);
+
+    }
+
+
+    public void getFromDB(){
+
+        //buscar expenses no banco
+        db.collection("transaction")
+                .whereEqualTo("type","expense")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+                                Gson gson = new GsonBuilder().create();
+
+                                String transactionJson = gson.toJson(document.getData());
+                                TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
+                                Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
+
+                                if(tdbModel.description.equals("cu"))
+                                {
+                                    Expense expense = (Expense) transactionFactory.transactionDBToDao(tdbModel);
+                                    expenses.add(expense);
+                                    Log.d(TAG, "for expenses getall |> "+ expense);
+
+                                    Log.d(TAG, "Mensagem expense getall from json: "+ expense.toString());
+                                }
+
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        //Log.d(TAG, " out expenses getall |> "+ expenses);
 
     }
 
@@ -94,35 +129,7 @@ public class ExpenseDAO implements Serializable {
     }
 
     public ArrayList<Expense> getAll(){
-
-        ArrayList<Expense> expensesDB = new ArrayList<>();
-
-        //buscar expenses no banco
-        db.collection("transaction")
-                .whereEqualTo("type","expense")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
-                                Gson gson = new GsonBuilder().create();
-                                String transactionJson = gson.toJson(document.getData());
-                                TransactionDBViewModel transactionDBViewModel =gson.fromJson(transactionJson, TransactionDBViewModel.class);
-                                Expense expense = gson.fromJson(transactionJson, Expense.class);
-                                expensesDB.add(expense);
-                                Log.d(TAG, "for expenses getall |> "+ expensesDB);
-                                Log.d(TAG, "Mensagem transviewModel |> "+ transactionDBViewModel.toString());
-                                Log.d(TAG, "Mensagem expense getall from json: "+ expense.toString());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-        Log.d(TAG, " out expenses getall |> "+ expenses);
-        return expensesDB;
+        return expenses;
     }
 
     public Double getTotal_amount(){

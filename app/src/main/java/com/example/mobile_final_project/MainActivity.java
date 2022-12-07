@@ -1,5 +1,7 @@
 package com.example.mobile_final_project;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.type.DateTime;
 
 
 //import com.google.gson.Gson;
@@ -32,13 +36,15 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpenseDAO expenseDAO = new ExpenseDAO(new Expense(0, "teste_expense", "Leisure", "place-holder-location", new Date(10, 9, 2003), 20.03));
-    IncomeDAO incomeDAO = new IncomeDAO(new Income(0, "teste_income", "Clothing", "place-holder-location", new Date(10, 9, 2003), 10.03));
+    ExpenseDAO expenseDAO = new ExpenseDAO();//new ExpenseDAO(new Expense(0, "teste_expense", "Leisure", "place-holder-location", new Date(System.currentTimeMillis()), 20.03));
+    IncomeDAO incomeDAO = new IncomeDAO();//new IncomeDAO(new Income(0, "teste_income", "Clothing", "place-holder-location", new Date(System.currentTimeMillis()), 10.03));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        expenseDAO.getFromDB();
 
         build_bottom_nav();
         build_float_btns();
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //refreshes fragment to show changes on list
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new Transactions_List()).commit();//.newInstance(expenseDAO, incomeDAO)).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, Transactions_List.newInstance(expenseDAO, incomeDAO)).commit();
     }
 
     private boolean fab_main_clicked = false;
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!fab_main_clicked){
+                    Log.d(TAG, "Mensagem de leitura local | "+ expenseDAO.getAll().get(0));
                     fab_main.startAnimation(rotateOpen);
 
                     fab_expense.setVisibility(View.VISIBLE);
@@ -193,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.transactions:
-                        fragment = new Transactions_List();//.newInstance(expenseDAO, incomeDAO);
+                        fragment = Transactions_List.newInstance(expenseDAO, incomeDAO);
                         break;
 
                     case R.id.more:
