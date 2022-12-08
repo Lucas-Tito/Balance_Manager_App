@@ -1,6 +1,7 @@
 package com.example.mobile_final_project;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +63,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
         Bundle args = new Bundle();
         args.putInt(newIncomeID_KEY, newIncomeID);
         fragment.setArguments(args);
+        Log.d(TAG, "New instance log");
         return fragment;
     }
 
@@ -69,7 +72,9 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             newIncomeID = getArguments().getInt(newIncomeID_KEY);
+            Log.d(TAG, "new income Id:  "+newIncomeID);
         }
+        Log.d(TAG, "On create add income ");
     }
 
     @Override
@@ -81,7 +86,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
         build_choose_categories(v);
         build_choose_location(v);
         build_confirm_btn(v);
-
+        Log.d(TAG, "On create view add income");
         return v;
     }
 
@@ -99,7 +104,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
                 new EditAmountTransaction().show(getActivity().getSupportFragmentManager(), EditAmountTransaction.newInstance().getTag());
             }
         });
-
+        Log.d(TAG, "On view created add income");
     }
 
 
@@ -163,7 +168,7 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
                 //Removes currency symbol from string to prevent error parsing to double
                 String str_amount = incomeAmount.getText().toString().replace(getText(R.string.currency), "");
 
-                Double amount = Double.parseDouble(str_amount);
+                Double amount = Double.parseDouble(str_amount.replace(",",""));
                 boolean isPaid = isPaid_switch.isChecked();
                 String description = description_label.getText().toString();
                 String category = category_label.getText().toString();
@@ -183,7 +188,6 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     @Override
     public void onResume() {
         super.onResume();
-
 
 
     }

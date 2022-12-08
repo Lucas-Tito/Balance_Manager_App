@@ -6,10 +6,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.mobile_final_project.factory.ITransactionFactory;
-import com.example.mobile_final_project.factory.TransactionFactory;
+import com.example.mobile_final_project.factoty.ITransactionFactory;
+import com.example.mobile_final_project.factoty.TransactionFactory;
 import com.example.mobile_final_project.model.Expense;
-import com.example.mobile_final_project.model.Transaction;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

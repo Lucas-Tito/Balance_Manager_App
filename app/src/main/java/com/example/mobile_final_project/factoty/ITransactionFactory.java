@@ -1,4 +1,4 @@
-package com.example.mobile_final_project.factory;
+package com.example.mobile_final_project.factoty;
 
 import com.example.mobile_final_project.model.Transaction;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;

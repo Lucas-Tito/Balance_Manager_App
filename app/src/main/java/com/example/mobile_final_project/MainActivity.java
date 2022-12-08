@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        incomeDAO.getFromDB(FirebaseFirestore.getInstance());
+        incomeDAO.getFromDB(FirebaseFirestore.getInstance(),FirebaseAuth.getInstance().getCurrentUser());
         expenseDAO.getFromDB(new ExpenseDAO.FireStoreCallback() {
             @Override
             public void onCallback() {

@@ -6,16 +6,18 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.mobile_final_project.factory.ITransactionFactory;
-import com.example.mobile_final_project.factory.TransactionFactory;
-import com.example.mobile_final_project.model.Expense;
+import com.example.mobile_final_project.factoty.ITransactionFactory;
+import com.example.mobile_final_project.factoty.TransactionFactory;
 import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,11 +40,14 @@ public class IncomeDAO implements Serializable {
 
 
 
-    public void getFromDB(FirebaseFirestore db){
+    public void getFromDB(FirebaseFirestore db, FirebaseUser user){
 
-        //buscar expenses no banco
+        Log.d(TAG, "email do user vindo da main "+user.getEmail());
+
+       // buscar expenses no banco
         db.collection("transaction")
                 .whereEqualTo("type","income")
+                .whereEqualTo("userEmail",user.getEmail().toString())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -79,6 +84,9 @@ public class IncomeDAO implements Serializable {
 
         incomes.add(income);
         total_amount += income.getValue();
+
+        Log.d(TAG, "this.transactionFactory.daoToTransactionDB(income) " + this.transactionFactory.daoToTransactionDB(income));
+
         db.collection("transaction")
                 .add(this.transactionFactory.daoToTransactionDB(income))
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

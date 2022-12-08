@@ -1,4 +1,4 @@
-package com.example.mobile_final_project.factory;
+package com.example.mobile_final_project.factoty;
 
 import static android.content.ContentValues.TAG;
 
@@ -11,6 +11,8 @@ import com.example.mobile_final_project.model.Expense;
 import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.model.Transaction;
 import com.example.mobile_final_project.viewmodel.TransactionDBViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ public class TransactionFactory implements ITransactionFactory
     public Map<String, Object> daoToTransactionDB(Object transaction)
     {
         Map<String, Object> transactionDB = new HashMap<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(transaction instanceof Expense)
         {
             transactionDB.put("category", ((Expense)transaction).getCategory().toString());
@@ -30,6 +33,7 @@ public class TransactionFactory implements ITransactionFactory
             transactionDB.put("isPaid", ((Expense)transaction).getIsPaid());
             transactionDB.put("location", ((Expense)transaction).getLocation());
             transactionDB.put("type", "expense");
+            transactionDB.put("userEmail",user.getEmail().toString() );
             transactionDB.put("value", ((Expense)transaction).getValue());
         }
         else if(transaction instanceof Income){
@@ -41,6 +45,7 @@ public class TransactionFactory implements ITransactionFactory
             transactionDB.put("isPaid", ((Income)transaction).getIsPaid());
             transactionDB.put("location", ((Income)transaction).getLocation());
             transactionDB.put("type", "income");
+            transactionDB.put("userEmail",user.getEmail().toString() );
             transactionDB.put("value", ((Income)transaction).getValue());
         }
 
