@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 expenseDAO.updateExpense((Expense) data.getSerializableExtra(("updatedExpense")));
 
             if(resultCode == 2)
-                expenseDAO.removeExpense((int) data.getSerializableExtra("expenseToRemove"));
+                expenseDAO.removeExpense((int) data.getSerializableExtra("expenseToRemove"), FirebaseFirestore.getInstance());
         }
 
 

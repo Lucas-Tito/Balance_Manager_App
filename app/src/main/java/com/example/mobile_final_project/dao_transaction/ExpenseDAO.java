@@ -102,10 +102,36 @@ public class ExpenseDAO implements Serializable {
 
     }
 
-    public void removeExpense(int id){
+    public void removeExpense(int id, FirebaseFirestore db){
 
         total_amount -= expenses.get(id).getValue();
         expenses.remove(id);
+
+        db.collection("transaction")
+                .whereEqualTo("id",id)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+                                Gson gson = new GsonBuilder().create();
+
+                                String transactionJson = gson.toJson(document.getData());
+                                TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
+                                //Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
+
+                                if(tdbModel.id == id)
+                                {
+                                    document.getReference().delete();
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
 
     }
 
