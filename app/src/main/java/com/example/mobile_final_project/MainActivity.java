@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 103){
             if(resultCode == MainActivity.RESULT_OK)
-                expenseDAO.updateExpense((Expense) data.getSerializableExtra(("updatedExpense")));
+                expenseDAO.updateExpense((Expense) data.getSerializableExtra(("updatedExpense")), FirebaseFirestore.getInstance(), FirebaseAuth.getInstance().getCurrentUser());
 
             if(resultCode == 2)
-                expenseDAO.removeExpense((int) data.getSerializableExtra("expenseToRemove"), FirebaseFirestore.getInstance());
+                expenseDAO.removeExpense((int) data.getSerializableExtra("expenseToRemove"), FirebaseFirestore.getInstance(), FirebaseAuth.getInstance().getCurrentUser());
         }
 
 
