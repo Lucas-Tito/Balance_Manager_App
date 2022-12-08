@@ -28,24 +28,20 @@ import java.util.ArrayList;
 //class implements Serializable so it can be passed from Activities to Fragments
 public class ExpenseDAO implements Serializable {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //FirebaseFirestore db = FirebaseFirestore.getInstance();
     ITransactionFactory transactionFactory = new TransactionFactory();
     ArrayList<Expense> expenses = new ArrayList<>();
     Double total_amount = 0.00;
 
     public ExpenseDAO(){}
 
-    public ExpenseDAO(Expense expense){
 
-        addExpense(expense);
-
-    }
 
 
     public interface FireStoreCallback{
         void onCallback();
     }
-    public void getFromDB(FireStoreCallback fireStoreCallback){
+    public void getFromDB(FireStoreCallback fireStoreCallback, FirebaseFirestore db){
 
         //buscar expenses no banco
         db.collection("transaction")
@@ -84,7 +80,7 @@ public class ExpenseDAO implements Serializable {
     }
 
 
-    public void addExpense(Expense expense){
+    public void addExpense(Expense expense, FirebaseFirestore db){
 
         expenses.add(expense);
         total_amount += expense.getValue();

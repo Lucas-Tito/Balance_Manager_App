@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.type.DateTime;
 
 
@@ -44,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        incomeDAO.getFromDB();
+        incomeDAO.getFromDB(FirebaseFirestore.getInstance());
         expenseDAO.getFromDB(new ExpenseDAO.FireStoreCallback() {
             @Override
             public void onCallback() {
                 build_bottom_nav();
             }
-        });
+        }, FirebaseFirestore.getInstance());
 
 
 
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 102)
             if(resultCode == MainActivity.RESULT_OK)
-                incomeDAO.addIncome((Income) data.getSerializableExtra(("newIncome")));
+                incomeDAO.addIncome((Income) data.getSerializableExtra(("newIncome")),FirebaseFirestore.getInstance());
 
 
         if (requestCode == 103){

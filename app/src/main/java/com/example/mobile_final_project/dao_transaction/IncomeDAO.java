@@ -29,20 +29,16 @@ public class IncomeDAO implements Serializable {
 
     ArrayList<Income> incomes = new ArrayList<>();
     Double total_amount = 0.00;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //FirebaseFirestore db = FirebaseFirestore.getInstance();
     ITransactionFactory transactionFactory = new TransactionFactory();
 
 
     public IncomeDAO(){}
 
-    public IncomeDAO(Income income){
-
-        addIncome(income);
-
-    }
 
 
-    public void getFromDB(){
+
+    public void getFromDB(FirebaseFirestore db){
 
         //buscar expenses no banco
         db.collection("transaction")
@@ -79,7 +75,7 @@ public class IncomeDAO implements Serializable {
 
     }
 
-    public void addIncome(Income income){
+    public void addIncome(Income income, FirebaseFirestore db){
 
         incomes.add(income);
         total_amount += income.getValue();
