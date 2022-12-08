@@ -122,7 +122,8 @@ public class ExpenseDAO implements Serializable {
                                 TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
                                 //Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
 
-                                if(tdbModel.id == id)
+                                System.out.println("sus " + tdbModel.type);
+                                if(tdbModel.id == id && tdbModel.type.equals("expense"))
                                 {
                                     document.getReference().delete();
                                 }

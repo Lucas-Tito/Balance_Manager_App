@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 101)
             if(resultCode == MainActivity.RESULT_OK)
-                //expenseDAO.addExpense((Expense) data.getSerializableExtra("newExpense"));
+                expenseDAO.addExpense((Expense) data.getSerializableExtra("newExpense"), FirebaseFirestore.getInstance());
 
 
         if (requestCode == 102)
