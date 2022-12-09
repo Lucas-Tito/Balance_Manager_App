@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +48,6 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
     private int newIncomeID;
 
     DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-
-
     private static DecimalFormat REAL_FORMATTER = new DecimalFormat("$ #,##0.00");
 
     //Componentes do layout
@@ -165,22 +164,29 @@ public class Add_Transaction_Income extends Fragment implements DialogCloseListe
             @Override
             public void onClick(View view) {
 
-                //Removes currency symbol from string to prevent error parsing to double
-                String str_amount = incomeAmount.getText().toString().replace(getText(R.string.currency), "");
+                if(TextUtils.isEmpty(incomeAmount.getText())){
+                    incomeAmount.setError("field cannot be empty");
+                    incomeAmount.requestFocus();
+                }
+                else {
+                    //Removes currency symbol from string to prevent error parsing to double
+                    String str_amount = incomeAmount.getText().toString().replace(getText(R.string.currency), "");
 
-                Double amount = Double.parseDouble(str_amount.replace(",",""));
-                boolean isPaid = isPaid_switch.isChecked();
-                String description = description_label.getText().toString();
-                String category = category_label.getText().toString();
-                String location = location_field.getText().toString();
+                    Double amount = Double.parseDouble(str_amount.replace(",",""));
+                    boolean isPaid = isPaid_switch.isChecked();
+                    String description = description_label.getText().toString();
+                    String category = category_label.getText().toString();
+                    String location = location_field.getText().toString();
 
-                Income newIncome = new Income(newIncomeID, description, category, location, new Date(2003, 9, 3), amount, isPaid);
+                    Income newIncome = new Income(newIncomeID, description, category, location, new Date(2003, 9, 3), amount, isPaid);
 
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("newIncome", newIncome);
-                getActivity().setResult(getActivity().RESULT_OK, returnIntent);
-                getActivity().finish();
-            }
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("newIncome", newIncome);
+                    getActivity().setResult(getActivity().RESULT_OK, returnIntent);
+                    getActivity().finish();
+                }
+                }
+
         });
 
     }

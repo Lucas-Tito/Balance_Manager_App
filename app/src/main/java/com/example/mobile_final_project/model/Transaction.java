@@ -18,6 +18,7 @@ public class Transaction implements Serializable {
 
     Transaction(int id, String description, String category, String location, Date date, double value){
 
+        this.id = id;
         this.description = description;
         this.category = category;
         this.location = location;
@@ -29,6 +30,7 @@ public class Transaction implements Serializable {
 
     Transaction(int id, String description, String category, String location, Date date, double value, boolean isPaid){
 
+        this.id = id;
         this.description = description;
         this.category = category;
         this.location = location;

@@ -91,7 +91,9 @@ public class Transactions_Adapter_RecyclerView extends RecyclerView.Adapter<Tran
                 public void onClick(View view) {
                     if(recyclerViewInterface!=null){
                         int pos = getAdapterPosition();
+                        System.out.println("postion: " + pos);
                         Transaction transaction = united_transactions.get(pos);
+                        System.out.println("postion 2: " + united_transactions.get(pos));
                         pos = transaction.getId();
                         String fragToStart;
 

@@ -36,8 +36,9 @@ public class Edit_Transaction_Activity extends AppCompatActivity {
 
         expenseToEdit = (Expense) getIntent().getSerializableExtra("expenseToEdit");
         incomeToEdit = (Income) getIntent().getSerializableExtra("incomeToEdit");
+        System.out.println("expense" + expenseToEdit);
         transaction_pos = getIntent().getIntExtra("transaction_pos", 0);
-
+        System.out.println("pos" + transaction_pos);
         build_frame_layout();
         build_back_btn();
         build_delete_btn();

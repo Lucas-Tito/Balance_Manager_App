@@ -171,7 +171,7 @@ public class Transactions_List extends Fragment implements IRecyclerView_Transac
         Intent intent = new Intent(getActivity(), Edit_Transaction_Activity.class);
         intent.putExtra("transaction_pos", position);
         intent.putExtra("frag_key", fragToStart);
-
+        System.out.println("amogus" + position);
 
 
         if(fragToStart.equals("editExpense")){

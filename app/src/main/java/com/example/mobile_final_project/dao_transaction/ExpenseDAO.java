@@ -41,11 +41,12 @@ public class ExpenseDAO implements Serializable {
     public interface FireStoreCallback{
         void onCallback();
     }
-    public void getFromDB(FireStoreCallback fireStoreCallback, FirebaseFirestore db){
+    public void getFromDB(FireStoreCallback fireStoreCallback, FirebaseFirestore db, FirebaseUser user){
 
         //buscar expenses no banco
         db.collection("transaction")
                 .whereEqualTo("type","expense")
+                .whereEqualTo("userEmail",user.getEmail().toString())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

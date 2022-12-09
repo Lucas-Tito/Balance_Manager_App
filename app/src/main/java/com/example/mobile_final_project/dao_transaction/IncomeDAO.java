@@ -104,20 +104,80 @@ public class IncomeDAO implements Serializable {
 
     }
 
-    public void removeIncome(int id){
+    public void removeIncome(int id, FirebaseFirestore db, FirebaseUser user){
 
         total_amount -= incomes.get(id).getValue();
         incomes.remove(id);
 
+        db.collection("transaction")
+                .whereEqualTo("id",id)
+                .whereEqualTo("userEmail",user.getEmail().toString())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+                                Gson gson = new GsonBuilder().create();
+
+                                String transactionJson = gson.toJson(document.getData());
+                                TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
+                                //Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
+
+                                System.out.println("sus " + tdbModel.type);
+                                if(tdbModel.id == id && tdbModel.type.equals("income"))
+                                {
+                                    document.getReference().delete();
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
     }
 
-    public void updateIncome(Income updatedIncome){
+    public void updateIncome(Income updatedIncome, FirebaseFirestore db, FirebaseUser user){
 
         incomes.get(updatedIncome.getId()).setValue(updatedIncome.getValue());
         incomes.get(updatedIncome.getId()).setIsPaid(updatedIncome.getIsPaid());
         incomes.get(updatedIncome.getId()).setDescription(updatedIncome.getDescription());
         incomes.get(updatedIncome.getId()).setCategory(updatedIncome.getCategory());
         incomes.get(updatedIncome.getId()).setLocation(updatedIncome.getLocation());
+
+        db.collection("transaction")
+                .whereEqualTo("id", updatedIncome.getId())
+                .whereEqualTo("userEmail",user.getEmail().toString())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, "Mensagem de leitura no banco | "+ document.getId() + " => " + document.getData());
+                                Gson gson = new GsonBuilder().create();
+
+                                String transactionJson = gson.toJson(document.getData());
+                                TransactionDBViewModel tdbModel = gson.fromJson(transactionJson, TransactionDBViewModel.class);
+                                //Log.d(TAG, "cu pode |> "+ transactionFactory.transactionDBToDao(tdbModel));
+
+                                System.out.println("sus " + tdbModel.type);
+                                if(tdbModel.id == updatedIncome.getId() && tdbModel.type.equals("income"))
+                                {
+                                    document.getReference().update("category", updatedIncome.getCategory());
+                                    document.getReference().update("description", updatedIncome.getDescription());
+                                    document.getReference().update("isPaid", updatedIncome.getIsPaid());
+                                    document.getReference().update("location", updatedIncome.getLocation());
+                                    document.getReference().update("value", updatedIncome.getValue());
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
 
     }
 

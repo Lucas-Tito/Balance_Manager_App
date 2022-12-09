@@ -53,6 +53,7 @@ public class Add_Transaction_Activity extends AppCompatActivity {
 
         if(getIntent().getIntExtra("fragToStart", 0) == 1){
             int newExpenseID = getIntent().getIntExtra("newExpenseID", -1);
+            System.out.println("SIZE: " + newExpenseID);
             fragmentToStart = Add_Transaction_Expense.newInstance(newExpenseID);
             toolbar_title.setText(R.string.toolbar_title_expense);
         }

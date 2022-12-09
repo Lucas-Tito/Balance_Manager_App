@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -164,21 +165,30 @@ public class Add_Transaction_Expense extends Fragment {
             @Override
             public void onClick(View view) {
 
-                //Removes currency symbol from string to prevent error parsing to double
-                String str_amount = label_amount.getText().toString().replace(getText(R.string.currency), "");
+                if(TextUtils.isEmpty(label_amount.getText())){
+                    label_amount.setError("field cannot be empty");
+                    label_amount.requestFocus();
+                }
+                else {
 
-                Double amount = Double.parseDouble(str_amount);
-                boolean isPaid = isPaid_switch.isChecked();
-                String description = description_label.getText().toString();
-                String category = category_label.getText().toString();
-                String location = location_field.getText().toString();
+                    //Removes currency symbol from string to prevent error parsing to double
+                    String str_amount = label_amount.getText().toString().replace(getText(R.string.currency), "");
 
-                Expense newExpense = new Expense(newExpenseID, description, category, location, new Date(2016, 9, 2), amount, isPaid);
+                    Double amount = Double.parseDouble(str_amount);
+                    boolean isPaid = isPaid_switch.isChecked();
+                    String description = description_label.getText().toString();
+                    String category = category_label.getText().toString();
+                    String location = location_field.getText().toString();
 
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("newExpense", newExpense);
-                getActivity().setResult(getActivity().RESULT_OK, returnIntent);
-                getActivity().finish();
+                    Expense newExpense = new Expense(newExpenseID, description, category, location, new Date(2016, 9, 2), amount, isPaid);
+                    System.out.println("SIZEE: " + newExpenseID);
+                    System.out.println("sumogus"+newExpense);
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("newExpense", newExpense);
+                    getActivity().setResult(getActivity().RESULT_OK, returnIntent);
+                    getActivity().finish();
+
+                }
             }
         });
 

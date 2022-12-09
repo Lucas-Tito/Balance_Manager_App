@@ -40,7 +40,7 @@
                 android:layout_marginBottom="60dp"
                 android:ems="10"
                 android:hint="Email"
-                android:inputType="textPassword" />
+                android:inputType="textEmailAddress" />
 
 
 
@@ -51,7 +51,7 @@
                     android:ems="10"
                     android:hint="Password"
                     android:layout_weight="0"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:drawableRight="@drawable/home_invisibility_ic"
                     android:drawableTint="@color/light_grey"/>
 

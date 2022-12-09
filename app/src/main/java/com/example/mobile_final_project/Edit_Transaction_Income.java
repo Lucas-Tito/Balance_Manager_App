@@ -1,14 +1,18 @@
 package com.example.mobile_final_project;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,7 @@ import android.widget.Toast;
 import com.example.mobile_final_project.dao_transaction.IncomeDAO;
 import com.example.mobile_final_project.model.Income;
 import com.example.mobile_final_project.utils.CategoryChooser;
+import com.example.mobile_final_project.utils.EditAmountTransaction;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -69,6 +74,20 @@ public class Edit_Transaction_Income extends Fragment {
         }
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        amount = getView().findViewById(R.id.amount);
+
+        amount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new EditAmountTransaction().show(getActivity().getSupportFragmentManager(), EditAmountTransaction.newInstance().getTag());
+            }
+        });
+        Log.d(TAG, "On view created add income");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -160,20 +179,27 @@ public class Edit_Transaction_Income extends Fragment {
             @Override
             public void onClick(View view) {
 
-                //Removes currency symbol from string to prevent error parsing to double
-                String str_amount = amount.getText().toString().replace(getText(R.string.currency), "");
+                if(TextUtils.isEmpty(amount.getText())){
+                    amount.setError("field cannot be empty");
+                    amount.requestFocus();
+                }
+                else {
+                    //Removes currency symbol from string to prevent error parsing to double
+                    String str_amount = amount.getText().toString().replace(getText(R.string.currency), "");
 
-                incomeToEdit.setValue(Double.parseDouble(str_amount));
-                incomeToEdit.setIsPaid(isReceived_switch.isChecked());
-                incomeToEdit.setDescription(description_field.getText().toString());
-                incomeToEdit.setCategory(category_field.getText().toString());
-                incomeToEdit.setLocation(location_field.getText().toString());
+                    incomeToEdit.setValue(Double.parseDouble(str_amount));
+                    incomeToEdit.setIsPaid(isReceived_switch.isChecked());
+                    incomeToEdit.setDescription(description_field.getText().toString());
+                    incomeToEdit.setCategory(category_field.getText().toString());
+                    incomeToEdit.setLocation(location_field.getText().toString());
 
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("updatedIncome", incomeToEdit);
-                getActivity().setResult(getActivity().RESULT_OK, returnIntent);
-                getActivity().finish();
-            }
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("updatedIncome", incomeToEdit);
+                    getActivity().setResult(getActivity().RESULT_OK, returnIntent);
+                    getActivity().finish();
+                }
+                }
+
         });
 
     }

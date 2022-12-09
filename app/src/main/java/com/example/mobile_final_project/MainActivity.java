@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCallback() {
                 build_bottom_nav();
             }
-        }, FirebaseFirestore.getInstance());
+        }, FirebaseFirestore.getInstance(), FirebaseAuth.getInstance().getCurrentUser());
 
 
 
@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 104){
             if(resultCode == MainActivity.RESULT_OK)
-                incomeDAO.updateIncome((Income) data.getSerializableExtra(("updatedIncome")));
+                incomeDAO.updateIncome((Income) data.getSerializableExtra(("updatedIncome")), FirebaseFirestore.getInstance(), FirebaseAuth.getInstance().getCurrentUser());
 
             if(resultCode == 2)
-                incomeDAO.removeIncome((int)(data.getSerializableExtra("incomeToRemove")));
+                incomeDAO.removeIncome((int)(data.getSerializableExtra("incomeToRemove")), FirebaseFirestore.getInstance(), FirebaseAuth.getInstance().getCurrentUser());
         }
 
 
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!fab_main_clicked){
-                    //Log.d(TAG, "Mensagem de leitura local | "+ expenseDAO.getAll().get(0));
+                    //Log.d(TAG, "Mensagem de leitura local | "+ expenseDAO.getAll().get(0)+ expenseDAO.getAll().get(1));
                     fab_main.startAnimation(rotateOpen);
 
                     fab_expense.setVisibility(View.VISIBLE);
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Add_Transaction_Activity.class);
                 intent.putExtra("fragToStart", 1);
                 intent.putExtra("newExpenseID", expenseDAO.getSize());
+                System.out.println("SIZE: " + expenseDAO.getSize());
                 startActivityForResult(intent, 101);
             }
         });
